@@ -24,7 +24,7 @@ public class CommonUtils {
      * @param data
      * @return
      */
-    public static Result success(ResultCode resultCode, List data){
+    public static Result success(ResultCode resultCode, Object data){
         return new Result(resultCode,data);
 
     }

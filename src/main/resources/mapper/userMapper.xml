@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.app.music.controller.dao.UserDao">
+<mapper namespace="com.app.music.dao.UserDao">
 
     <insert id="insertUser" parameterType="User">
       INSERT INTO user (user_id,user_name,phone_name,email) VALUES (#{userId},#{userName},#{phoneName},#{email},#{createTime})
     </insert>
-    <select id="queryUserByUserCode" parameterType="String" resultType="User" >
-        SELECT *FROM user WHENEVER user_code = #{userCode}
+    <select id="queryUserByUserCode" parameterType="String" resultMap="userMap" >
+        SELECT * FROM user WHERE user_code = #{userCode}
     </select>
+
+    <resultMap id="userMap" type="User">
+        <result column="user_code" property="userCode"/>
+        <result column="pass_word" property="password"/>
+    </resultMap>
 </mapper>
 

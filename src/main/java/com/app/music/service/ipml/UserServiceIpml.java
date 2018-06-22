@@ -29,7 +29,8 @@ public class UserServiceIpml implements IUserService {
         if (user == null) {
             return CommonUtils.failed(ResultCode.LOGIN_ERROR);
         }
-        if (!Md5.encode(password).equals(user.getPassword())) {
+        String encode = Md5.encode(password);
+        if (!encode.equals(user.getPassword())) {
             return CommonUtils.failed(ResultCode.LOGIN_ERROR);
         } else {
             Map<String, String> stringStringMap = new HashMap<>();
@@ -37,7 +38,7 @@ public class UserServiceIpml implements IUserService {
             stringStringMap.put("user", s);
             List<Map> list = new ArrayList<>();
             list.add(stringStringMap);
-            return CommonUtils.success(ResultCode.SUCCESS, list);
+            return CommonUtils.success(ResultCode.SUCCESS, s);
         }
 
     }

@@ -2,16 +2,16 @@ package com.app.music.utils;
 
 import java.util.List;
 
-public class Result<T> {
+public class Result {
     private int code;
     private String msg;
-    private List<T> data;
+    private Object data;
 
     public Result() {
 
     }
 
-    public Result(ResultCode resultCode, List<T> data) {
+    public Result(ResultCode resultCode, Object data) {
         this(resultCode);
         this.data = data;
     }
@@ -19,6 +19,14 @@ public class Result<T> {
     public Result(ResultCode resultCode) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMsg();
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -29,21 +37,11 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    public List<T> getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(List<T> data) {
+    public void setData(Object data) {
         this.data = data;
     }
-
-    public int getCode() {
-
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
 }
