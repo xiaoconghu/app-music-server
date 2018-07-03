@@ -38,7 +38,8 @@ public class UserServiceIpml implements IUserService {
             stringStringMap.put("user", s);
             List<Map> list = new ArrayList<>();
             list.add(stringStringMap);
-            return CommonUtils.success(ResultCode.SUCCESS, s);
+
+            return CommonUtils.success(ResultCode.SUCCESS, user);
         }
 
     }

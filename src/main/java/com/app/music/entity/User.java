@@ -1,6 +1,8 @@
 package com.app.music.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private String userCode;
     private String userName;
     private String create;
