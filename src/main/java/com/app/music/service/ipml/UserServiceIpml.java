@@ -57,12 +57,28 @@ public class UserServiceIpml implements IUserService {
             return CommonUtils.failed(ResultCode.LOGIN_USER_ERROR);
         } else {
             Boolean insertUser = userDao.insertUser(user);
-            if(insertUser){
+            if (insertUser) {
                 return CommonUtils.success(ResultCode.SUCCESS, null);
 
+            } else {
+                return CommonUtils.failed(ResultCode.NETWORK_ERROR);
+            }
+        }
+    }
+
+    @Override
+    public Result updateUser(Map map, HttpServletRequest request) {
+        int userId = (int) map.get("userId");
+        User user = userDao.queryUserByUserId(userId);
+        if (user != null){
+            Boolean aBoolean = userDao.updateUser(map);
+            if(aBoolean){
+                return CommonUtils.success(ResultCode.SUCCESS, null);
             }else {
                 return CommonUtils.failed(ResultCode.NETWORK_ERROR);
             }
+        }else {
+            return CommonUtils.failed(ResultCode.NETWORK_ERROR);
         }
     }
 

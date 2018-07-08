@@ -5,14 +5,21 @@
     <insert id="insertUser" parameterType="User">
       INSERT INTO user (user_code,user_name,phone_name,email) VALUES (#{userCode},#{userName},#{phoneName},#{email},#{createTime})
     </insert>
-
+    <insert id="updateUser" parameterType="Map">
+      update user (user_code,user_name,phone_name,email) VALUES (#{userCode},#{userName},#{phoneName},#{email},#{createTime})
+      where id = #{userId}
+    </insert>
     <select id="queryUserByUserCode" parameterType="String" resultMap="userMap" >
         SELECT * FROM user WHERE user_code = #{userCode}
     </select>
-
+    <select id="queryUserByUserId" parameterType="int" resultMap="userMap" >
+        SELECT * FROM user WHERE id = #{userId}
+    </select>
     <resultMap id="userMap" type="User">
         <result column="user_code" property="userCode"/>
         <result column="pass_word" property="password"/>
+        <result column="user_name" property="userName"/>
+        <result column="create" property="create"/>
     </resultMap>
 </mapper>
 

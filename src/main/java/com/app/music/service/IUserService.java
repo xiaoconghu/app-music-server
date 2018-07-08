@@ -33,4 +33,12 @@ public interface IUserService {
      * @return Result
      */
     Result register(User user, HttpServletRequest request);
+
+    /**
+     * 修改用户
+     * @param map
+     * @param request
+     * @return
+     */
+    Result updateUser(Map map, HttpServletRequest request);
 }

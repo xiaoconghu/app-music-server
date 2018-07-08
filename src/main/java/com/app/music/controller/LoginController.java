@@ -37,10 +37,10 @@ public class LoginController {
 
     /**
      * 注册
-     *
-     * @param params
+     * @param user
      * @param request
-     * @return String
+     * @return
+     * @throws IOException
      */
     @PostMapping("/register")
     public String register(User user, HttpServletRequest request) throws IOException {
@@ -48,6 +48,13 @@ public class LoginController {
         return CommonUtils.classToJson(result);
     }
 
+    /**
+     * 登出
+     * @param params
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/logout")
     public String logout(@RequestBody String params, HttpServletRequest request) throws IOException {
 
@@ -58,5 +65,21 @@ public class LoginController {
 
     }
 
+    /**
+     * 修改用户
+     * @param params
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/updateUser")
+    public String updateUser(@RequestBody String params, HttpServletRequest request) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map map = mapper.readValue(params, Map.class);
+        Result result = userService.updateUser(map, request);
+        return CommonUtils.classToJson(result);
+
+    }
 
 }
