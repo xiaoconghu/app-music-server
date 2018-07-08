@@ -1,5 +1,6 @@
 package com.app.music.service;
 
+import com.app.music.entity.User;
 import com.app.music.utils.Result;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -31,5 +32,5 @@ public interface IUserService {
      * @param request HttpServletRequest
      * @return Result
      */
-    Result register(Map map, HttpServletRequest request);
+    Result register(User user, HttpServletRequest request);
 }

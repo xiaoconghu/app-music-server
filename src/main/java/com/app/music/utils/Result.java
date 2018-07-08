@@ -1,6 +1,6 @@
 package com.app.music.utils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Result {
     private int code;
@@ -13,7 +13,11 @@ public class Result {
 
     public Result(ResultCode resultCode, Object data) {
         this(resultCode);
-        this.data = data;
+        if (data == null || "".equals(data)) {
+            this.data = new ArrayList<Object>();
+        } else {
+            this.data = data;
+        }
     }
 
     public Result(ResultCode resultCode) {

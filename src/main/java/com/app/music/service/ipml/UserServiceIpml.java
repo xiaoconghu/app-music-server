@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 public class UserServiceIpml implements IUserService {
     @Autowired
@@ -50,8 +51,19 @@ public class UserServiceIpml implements IUserService {
     }
 
     @Override
-    public Result register(Map map, HttpServletRequest request) {
-        return null;
+    public Result register(User user, HttpServletRequest request) {
+        User _user = userDao.queryUserByUserCode(user.getUserCode());
+        if (_user != null) {
+            return CommonUtils.failed(ResultCode.LOGIN_USER_ERROR);
+        } else {
+            Boolean insertUser = userDao.insertUser(user);
+            if(insertUser){
+                return CommonUtils.success(ResultCode.SUCCESS, null);
+
+            }else {
+                return CommonUtils.failed(ResultCode.NETWORK_ERROR);
+            }
+        }
     }
 
 }

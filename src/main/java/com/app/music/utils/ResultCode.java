@@ -5,7 +5,9 @@ public enum ResultCode {
      * 请求成功
      */
     SUCCESS(0, "请求成功"),
-    LOGIN_ERROR(10001,"用户名或密码错误");
+    LOGIN_ERROR(10001, "用户名或密码错误"),
+    NETWORK_ERROR(-1, "网络异常，请稍后重试"),
+    LOGIN_USER_ERROR(11000,"用户名已存在");
 
     /**
      * 请求代码

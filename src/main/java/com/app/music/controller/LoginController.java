@@ -1,5 +1,6 @@
 package com.app.music.controller;
 
+import com.app.music.entity.User;
 import com.app.music.service.IUserService;
 import com.app.music.utils.CommonUtils;
 import com.app.music.utils.Result;
@@ -42,10 +43,8 @@ public class LoginController {
      * @return String
      */
     @PostMapping("/register")
-    public String register(@RequestBody String params, HttpServletRequest request) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Map map = mapper.readValue(params, Map.class);
-        Result result = userService.register(map, request);
+    public String register(User user, HttpServletRequest request) throws IOException {
+        Result result = userService.register(user, request);
         return CommonUtils.classToJson(result);
     }
 
