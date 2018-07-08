@@ -42,8 +42,21 @@ public class LoginController {
      * @return String
      */
     @PostMapping("/register")
-    public String register(@RequestBody String params, HttpServletRequest request) {
-        return "";
+    public String register(@RequestBody String params, HttpServletRequest request) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Map map = mapper.readValue(params, Map.class);
+        Result result = userService.register(map, request);
+        return CommonUtils.classToJson(result);
+    }
+
+    @PostMapping("/logout")
+    public String logout(@RequestBody String params, HttpServletRequest request) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map map = mapper.readValue(params, Map.class);
+        Result result = userService.logout(map, request);
+        return CommonUtils.classToJson(result);
+
     }
 
 

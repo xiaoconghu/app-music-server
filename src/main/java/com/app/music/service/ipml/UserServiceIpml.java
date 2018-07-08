@@ -44,12 +44,13 @@ public class UserServiceIpml implements IUserService {
     }
 
     @Override
-    public Result logout(HttpServletRequest request) {
+    public Result logout(Map map, HttpServletRequest request) {
         return null;
     }
 
     @Override
-    public Result register(HttpServletRequest request) {
+    public Result register(Map map, HttpServletRequest request) {
         return null;
     }
+
 }

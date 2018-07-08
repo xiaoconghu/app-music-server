@@ -2,7 +2,6 @@ package com.app.music.service;
 
 import com.app.music.utils.Result;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -11,6 +10,7 @@ public interface IUserService {
 
     /**
      * 登录
+     *
      * @param map
      * @param request
      * @return Result
@@ -23,7 +23,7 @@ public interface IUserService {
      * @param request HttpServletRequest
      * @return Result
      */
-    Result logout(HttpServletRequest request);
+    Result logout(Map map, HttpServletRequest request);
 
     /**
      * 用户注册
@@ -31,5 +31,5 @@ public interface IUserService {
      * @param request HttpServletRequest
      * @return Result
      */
-    Result register(HttpServletRequest request);
+    Result register(Map map, HttpServletRequest request);
 }
