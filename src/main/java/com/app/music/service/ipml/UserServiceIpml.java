@@ -1,6 +1,6 @@
 package com.app.music.service.ipml;
 
-import com.app.music.dao.UserDao;
+import com.app.music.dao.IUserDao;
 import com.app.music.entity.User;
 import com.app.music.service.IUserService;
 import com.app.music.utils.CommonUtils;
@@ -12,20 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
 public class UserServiceIpml implements IUserService {
     @Autowired
-    private UserDao userDao;
+    private IUserDao IUserDao;
 
     @Override
     public Result login(Map map, HttpServletRequest request) throws JsonProcessingException {
         String userCode = (String) map.get("userCode");
         String password = (String) map.get("password");
-        User user = userDao.queryUserByUserCode(userCode);
+        User user = IUserDao.queryUserByUserCode(userCode);
         if (user == null) {
             return CommonUtils.failed(ResultCode.LOGIN_ERROR);
         }
@@ -51,7 +50,7 @@ public class UserServiceIpml implements IUserService {
 
     @Override
     public Result register(User user, HttpServletRequest request) {
-        User _user = userDao.queryUserByUserCode(user.getUserCode());
+        User _user = IUserDao.queryUserByUserCode(user.getUserCode());
         if (_user != null) {
             return CommonUtils.failed(ResultCode.LOGIN_USER_ERROR);
         } else {
@@ -60,7 +59,7 @@ public class UserServiceIpml implements IUserService {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String createTime = sdf.format(new Date());
             user.setCreateTime(createTime);
-            Boolean insertUser = userDao.insertUser(user);
+            Boolean insertUser = IUserDao.insertUser(user);
             if (insertUser) {
                 return CommonUtils.success(ResultCode.SUCCESS, null);
 
@@ -73,9 +72,9 @@ public class UserServiceIpml implements IUserService {
     @Override
     public Result updateUser(Map map, HttpServletRequest request) {
         String userId = (String) map.get("userId");
-        User user = userDao.queryUserByUserId(userId);
+        User user = IUserDao.queryUserByUserId(userId);
         if (user != null){
-            Boolean aBoolean = userDao.updateUser(map);
+            Boolean aBoolean = IUserDao.updateUser(map);
             if(aBoolean){
                 return CommonUtils.success(ResultCode.SUCCESS, null);
             }else {
@@ -88,12 +87,12 @@ public class UserServiceIpml implements IUserService {
 
     @Override
     public Result getAllUser() {
-        return CommonUtils.success(ResultCode.SUCCESS, userDao.queryAllUser());
+        return CommonUtils.success(ResultCode.SUCCESS, IUserDao.queryAllUser());
     }
 
     @Override
     public Result deleteUserById(String userId) {
-        Boolean aBoolean = userDao.deleteUserByUserId(userId);
+        Boolean aBoolean = IUserDao.deleteUserByUserId(userId);
         if (aBoolean){
             return CommonUtils.success(ResultCode.SUCCESS,null);
         }else {

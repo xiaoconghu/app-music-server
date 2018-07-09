@@ -2,12 +2,30 @@ package com.app.music.entity;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
+    /**
+     * 用户登录代码
+     */
     private String userCode;
+    /**
+     * 用户昵称
+     */
     private String userName;
+    /**
+     * 创建时间
+     */
     private String createTime;
+    /**
+     * 用户邮箱
+     */
     private String email;
+    /**
+     * 用户手机号码
+     */
     private String phoneNumber;
+    /**
+     * 用户密码
+     */
     private String password;
 
     public String getUserCode() {
