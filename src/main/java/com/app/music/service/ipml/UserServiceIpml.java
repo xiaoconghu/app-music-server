@@ -12,10 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class UserServiceIpml implements IUserService {
@@ -58,6 +57,9 @@ public class UserServiceIpml implements IUserService {
         } else {
             String encode = Md5.encode(user.getPassword());
             user.setPassword(encode);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String createTime = sdf.format(new Date());
+            user.setCreateTime(createTime);
             Boolean insertUser = userDao.insertUser(user);
             if (insertUser) {
                 return CommonUtils.success(ResultCode.SUCCESS, null);
@@ -70,7 +72,7 @@ public class UserServiceIpml implements IUserService {
 
     @Override
     public Result updateUser(Map map, HttpServletRequest request) {
-        int userId = (int) map.get("userId");
+        String userId = (String) map.get("userId");
         User user = userDao.queryUserByUserId(userId);
         if (user != null){
             Boolean aBoolean = userDao.updateUser(map);

@@ -18,7 +18,7 @@ public interface UserDao {
      *
      * @return User
      */
-    User queryUserByUserId(int userId);
+    User queryUserByUserId(String userId);
 
     /**
      * 查询所有用户

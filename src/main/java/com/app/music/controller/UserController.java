@@ -37,7 +37,7 @@ public class UserController {
 
     /**
      * 注册
-     * @param user
+     * @param
      * @param request
      * @return
      * @throws IOException
