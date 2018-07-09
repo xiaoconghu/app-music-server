@@ -23,6 +23,7 @@ public class Result {
     public Result(ResultCode resultCode) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMsg();
+        this.data = new ArrayList<Object>();
     }
 
     public int getCode() {

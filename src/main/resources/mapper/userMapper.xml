@@ -3,10 +3,10 @@
 <mapper namespace="com.app.music.dao.UserDao">
 
     <insert id="insertUser" parameterType="User">
-      INSERT INTO user (user_code,user_name,phone_name,email) VALUES (#{userCode},#{userName},#{phoneName},#{email},#{createTime})
+      INSERT INTO user (user_code,user_name,password,phone_number,email,create_time) VALUES (#{userCode},#{userName},#{password},#{phoneNumber},#{email},#{createTime})
     </insert>
     <insert id="updateUser" parameterType="Map">
-      update user (user_code,user_name,phone_name,email) VALUES (#{userCode},#{userName},#{phoneName},#{email},#{createTime})
+      update user (user_code,user_name,phone_number,email) VALUES (#{userCode},#{userName},#{phoneNumber},#{email},#{createTime})
       where id = #{userId}
     </insert>
     <select id="queryUserByUserCode" parameterType="String" resultMap="userMap" >
@@ -19,7 +19,7 @@
         <result column="user_code" property="userCode"/>
         <result column="pass_word" property="password"/>
         <result column="user_name" property="userName"/>
-        <result column="create" property="create"/>
+        <result column="createTime" property="createTime"/>
     </resultMap>
 </mapper>
 

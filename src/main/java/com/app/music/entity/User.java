@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class User implements Serializable{
     private String userCode;
     private String userName;
-    private String create;
+    private String createTime;
     private String email;
-    private String phoneName;
+    private String phoneNumber;
     private String password;
 
     public String getUserCode() {
@@ -26,12 +26,12 @@ public class User implements Serializable{
         this.userName = userName;
     }
 
-    public String getCreate() {
-        return create;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate(String create) {
-        this.create = create;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getEmail() {
@@ -42,12 +42,12 @@ public class User implements Serializable{
         this.email = email;
     }
 
-    public String getPhoneName() {
-        return phoneName;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneName(String phoneName) {
-        this.phoneName = phoneName;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {

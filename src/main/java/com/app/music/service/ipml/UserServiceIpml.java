@@ -56,6 +56,8 @@ public class UserServiceIpml implements IUserService {
         if (_user != null) {
             return CommonUtils.failed(ResultCode.LOGIN_USER_ERROR);
         } else {
+            String encode = Md5.encode(user.getPassword());
+            user.setPassword(encode);
             Boolean insertUser = userDao.insertUser(user);
             if (insertUser) {
                 return CommonUtils.success(ResultCode.SUCCESS, null);

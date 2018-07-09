@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
 
@@ -43,7 +44,9 @@ public class LoginController {
      * @throws IOException
      */
     @PostMapping("/register")
-    public String register(User user, HttpServletRequest request) throws IOException {
+    public String register(@RequestBody String params, HttpServletRequest request) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        User user = mapper.readValue(params, User.class);
         Result result = userService.register(user, request);
         return CommonUtils.classToJson(result);
     }
