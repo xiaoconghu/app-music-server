@@ -41,4 +41,11 @@ public interface UserDao {
      */
     Boolean updateUser(Map map);
 
+    /**
+     * 删除userById
+     * @param userId
+     * @return
+     */
+    Boolean deleteUserByUserId(String userId);
+
 }

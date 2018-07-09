@@ -37,10 +37,10 @@ public class UserServiceIpml implements IUserService {
             Map<String, String> stringStringMap = new HashMap<>();
             String s = CommonUtils.classToJson(user);
             stringStringMap.put("user", s);
-            List<Map> list = new ArrayList<>();
-            list.add(stringStringMap);
+            ArrayList<User> list = new ArrayList<>();
+            list.add(user);
 
-            return CommonUtils.success(ResultCode.SUCCESS, user);
+            return CommonUtils.success(ResultCode.SUCCESS, list);
         }
 
     }
@@ -79,6 +79,21 @@ public class UserServiceIpml implements IUserService {
             }else {
                 return CommonUtils.failed(ResultCode.NETWORK_ERROR);
             }
+        }else {
+            return CommonUtils.failed(ResultCode.NETWORK_ERROR);
+        }
+    }
+
+    @Override
+    public Result getAllUser() {
+        return CommonUtils.success(ResultCode.SUCCESS, userDao.queryAllUser());
+    }
+
+    @Override
+    public Result deleteUserById(String userId) {
+        Boolean aBoolean = userDao.deleteUserByUserId(userId);
+        if (aBoolean){
+            return CommonUtils.success(ResultCode.SUCCESS,null);
         }else {
             return CommonUtils.failed(ResultCode.NETWORK_ERROR);
         }

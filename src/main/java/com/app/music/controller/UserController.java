@@ -10,13 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/music/user")
-public class LoginController {
+public class UserController {
     @Autowired
     IUserService userService;
 
@@ -83,6 +82,29 @@ public class LoginController {
         Result result = userService.updateUser(map, request);
         return CommonUtils.classToJson(result);
 
+    }
+
+    /**
+     * 获取所有的用户
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GetMapping("/getAllUser")
+    public String getAllUser() throws JsonProcessingException {
+        Result allUser = userService.getAllUser();
+        return CommonUtils.classToJson(allUser);
+    }
+
+    /**
+     * 通过id删除用户
+     * @param userId
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GetMapping("/deleteUserById/{userId}")
+    public String deleteUserById(@PathVariable String userId) throws JsonProcessingException {
+        Result allUser = userService.deleteUserById(userId);
+        return CommonUtils.classToJson(allUser);
     }
 
 }

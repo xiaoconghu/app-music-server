@@ -5,6 +5,8 @@ import com.app.music.utils.Result;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public interface IUserService {
@@ -41,4 +43,17 @@ public interface IUserService {
      * @return
      */
     Result updateUser(Map map, HttpServletRequest request);
+
+    /**
+     * 获取所有的用户列表
+     * @return
+     */
+    Result getAllUser();
+
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+    Result deleteUserById(String userId);
 }
