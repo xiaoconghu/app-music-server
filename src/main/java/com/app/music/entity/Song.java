@@ -1,7 +1,11 @@
 package com.app.music.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Blob;
+
 public class Song {
-    /**
+    /**{cdId},#{songName},#{songUrl},#{singer},#{createTime},#{songPic},#{songType}#{description}
      * 歌曲名称
      */
     private String songName;
@@ -29,12 +33,17 @@ public class Song {
     /**
      * 歌曲类型
      */
-    private String type;
+    private String songType;
 
     /**
      * 所属 cd
      */
-    private String cdId;
+    private int cdId;
+
+    /**
+     * file
+     */
+    private MultipartFile file;
 
     /**
      * 描述
@@ -82,13 +91,6 @@ public class Song {
         this.songPic = songPic;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getDescription() {
         return description;
@@ -98,11 +100,30 @@ public class Song {
         this.description = description;
     }
 
-    public String getCdId() {
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+
+    public int getCdId() {
         return cdId;
     }
 
-    public void setCdId(String cdId) {
+    public void setCdId(int cdId) {
         this.cdId = cdId;
+    }
+
+    public String getSongType() {
+
+        return songType;
+    }
+
+    public void setSongType(String songType) {
+        this.songType = songType;
     }
 }

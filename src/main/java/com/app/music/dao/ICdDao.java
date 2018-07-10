@@ -1,4 +1,7 @@
 package com.app.music.dao;
 
-public interface ICdDao {
+import com.app.music.entity.Cd;
+
+public interface ICdDao extends ICommonDao<Cd>{
+
 }

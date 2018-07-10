@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.app.music.dao.ICdDao">
+
+    <insert id="insert" parameterType="Cd">
+        INSERT INTO cd (cd_name,create_user,create_time,cd_pic,description)
+        VALUES
+        (#{cdName},#{createUser},#{createTime},#{cdPic},#{description})
+    </insert>
+
+</mapper>

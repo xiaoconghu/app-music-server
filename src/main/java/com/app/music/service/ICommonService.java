@@ -2,6 +2,8 @@ package com.app.music.service;
 
 import com.app.music.utils.Result;
 
+import java.io.IOException;
+
 public interface ICommonService<T> {
     /**
      * 新增
@@ -9,7 +11,7 @@ public interface ICommonService<T> {
      * @param t
      * @return
      */
-    Result insert(T t);
+    Result insert(T t) throws IOException;
 
     /**
      * 删除
@@ -22,7 +24,6 @@ public interface ICommonService<T> {
     /**
      * 修改
      *
-     * @param t
      * @return
      */
     Result update(T t);
