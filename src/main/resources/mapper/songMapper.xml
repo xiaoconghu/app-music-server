@@ -8,5 +8,10 @@
         (#{cdId},#{songName},#{songUrl},#{singer},#{createTime},#{songPic},#{songType},#{description})
     </insert>
 
+    <delete id="deleteSongsByCd" parameterType="String">
+        delete from song where id in (
+        select s.id from cd c left join song s on s.cd_id = c.id
+        )
+    </delete>
 </mapper>
 

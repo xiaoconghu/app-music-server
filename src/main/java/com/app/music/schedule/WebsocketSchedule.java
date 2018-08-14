@@ -1,3 +1,4 @@
+/*
 package com.app.music.schedule;
 
 import com.app.music.config.MyHandler;
@@ -17,6 +18,8 @@ public class WebsocketSchedule {
     @Scheduled(fixedDelay = 2000)
     public void sendMsg(){
         //myHandler.sendMessageToUser("888",new TextMessage("hxc"));
+        System.out.println(1111);
         myHandler.sendMessageToAllUsers(new TextMessage("cccccccc"));
     }
 }
+*/
