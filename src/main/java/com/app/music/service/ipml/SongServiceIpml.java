@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class SongServiceIpml implements ISongService {
@@ -40,16 +41,29 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result delete(String id) {
-        return null;
+        Boolean delete = songDao.delete(id);
+
+        return delete ? CommonUtils.success(ResultCode.SUCCESS, null)
+                : CommonUtils.failed(ResultCode.NETWORK_ERROR);
     }
 
     @Override
     public Result update(Song song) {
-        return null;
+        Song _song = songDao.queryById(song.getId());
+        if (_song != null) {
+            Boolean update = songDao.update(song);
+            return update ? CommonUtils.success(ResultCode.SUCCESS, null)
+                    : CommonUtils.failed(ResultCode.NETWORK_ERROR);
+        } else return CommonUtils.failed(ResultCode.SONG_ERROR);
     }
 
     @Override
     public Result query() {
+        return null;
+    }
+
+    @Override
+    public Song queryById(String id) {
         return null;
     }
 }

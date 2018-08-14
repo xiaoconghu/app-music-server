@@ -1,6 +1,8 @@
 package com.app.music.entity;
 
-public class Cd {
+import java.io.Serializable;
+
+public class Cd implements Serializable {
 
     /**
      * 歌单名称

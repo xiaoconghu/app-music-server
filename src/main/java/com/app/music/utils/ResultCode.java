@@ -7,7 +7,8 @@ public enum ResultCode {
     SUCCESS(0, "请求成功"),
     LOGIN_ERROR(10001, "用户名或密码错误"),
     NETWORK_ERROR(-1, "网络异常，请稍后重试"),
-    LOGIN_USER_ERROR(11000,"用户名已存在");
+    LOGIN_USER_ERROR(11000, "用户名已存在"),
+    SONG_ERROR(11001, "歌曲不存在，或已删除");
 
     /**
      * 请求代码

@@ -4,6 +4,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Song {
     /**
+     * id
+     */
+    private String id;
+
+    /**
      * 歌曲名称
      */
     private String songName;
@@ -48,6 +53,15 @@ public class Song {
      */
 
     private String description;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public String getSongName() {
         return songName;

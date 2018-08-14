@@ -34,4 +34,12 @@ public interface ICommonService<T> {
      * @return
      */
     Result query();
+
+    /**
+     * 查询单条
+     *
+     * @param id
+     * @return
+     */
+    T queryById(String id);
 }

@@ -17,7 +17,7 @@ public interface ICommonDao<T> {
      * @param id
      * @return
      */
-    Boolean delete(int id);
+    Boolean delete(String id);
 
     /**
      * 修改
@@ -33,4 +33,12 @@ public interface ICommonDao<T> {
      * @return
      */
     List<T> query();
+
+    /**
+     * 查询单条
+     *
+     * @param id
+     * @return
+     */
+    T queryById(String id);
 }
