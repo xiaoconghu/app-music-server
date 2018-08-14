@@ -13,5 +13,8 @@
         SELECT * from (select s.id from cd c left join song s on s.cd_id = c.id WHERE c.id = #{id}) a
         )
     </delete>
+    <delete id="delete" parameterType="String">
+        DELETE  FROM song WHERE id = #{id}
+    </delete>
 </mapper>
 
