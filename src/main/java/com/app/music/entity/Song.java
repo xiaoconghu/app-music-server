@@ -2,10 +2,8 @@ package com.app.music.entity;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Blob;
-
 public class Song {
-    /**{cdId},#{songName},#{songUrl},#{singer},#{createTime},#{songPic},#{songType}#{description}
+    /**
      * 歌曲名称
      */
     private String songName;
