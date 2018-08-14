@@ -7,5 +7,7 @@
         VALUES
         (#{cdName},#{createUser},#{createTime},#{cdPic},#{description})
     </insert>
-
+    <delete id="delete" parameterType="String">
+        DELETE FROM cd WHERE id= #{id}
+    </delete>
 </mapper>

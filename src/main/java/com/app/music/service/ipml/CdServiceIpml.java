@@ -33,9 +33,16 @@ public class CdServiceIpml implements ICdService {
 
     @Override
     public Result delete(String id) {
-        songDao.deleteSongsByCd(id);
-        cdDao.delete(id);
-        return CommonUtils.success(ResultCode.SUCCESS,null);
+        Cd cd = cdDao.queryById(id);
+        if (cd != null) {
+            songDao.deleteSongsByCd(id);
+            cdDao.delete(id);
+            return CommonUtils.success(ResultCode.SUCCESS, null);
+
+        } else {
+            return CommonUtils.failed(ResultCode.NETWORK_ERROR);
+        }
+
     }
 
     @Override

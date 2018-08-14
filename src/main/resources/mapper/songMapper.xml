@@ -10,7 +10,7 @@
 
     <delete id="deleteSongsByCd" parameterType="String">
         delete from song where id in (
-        select s.id from cd c left join song s on s.cd_id = c.id
+        SELECT * from (select s.id from cd c left join song s on s.cd_id = c.id WHERE c.id = #{id}) a
         )
     </delete>
 </mapper>
