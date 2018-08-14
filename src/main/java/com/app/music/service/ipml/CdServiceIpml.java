@@ -52,4 +52,9 @@ public class CdServiceIpml implements ICdService {
     public Result query() {
         return null;
     }
+
+    @Override
+    public Cd queryById(String id) {
+        return null;
+    }
 }
