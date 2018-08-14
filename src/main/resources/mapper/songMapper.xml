@@ -16,5 +16,31 @@
     <delete id="delete" parameterType="String">
         DELETE  FROM song WHERE id = #{id}
     </delete>
+    <update id="update" parameterType="Song">
+        UPDATE song
+        <set>
+            <if test="songName!=null">
+                song_name = #{songName},
+            </if>
+            <if test="songUrl!=null">
+                song_url = #{songUrl},
+            </if>
+            <if test="singer!=null">
+                singer = #{singer},
+            </if>
+            <if test="createTime!=null">
+                create_time = #{createTime},
+            </if>
+            <if test="songPic!=null">
+                song_pic = #{songPic},
+            </if>
+            <if test="songType!=null">
+                song_type = #{songType},
+            </if>
+            <if test="description!=null">
+                description = #{description},
+            </if>        </set>
+        WHERE id = #{id}
+    </update>
 </mapper>
 
