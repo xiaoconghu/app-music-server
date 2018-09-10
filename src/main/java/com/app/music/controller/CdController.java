@@ -40,7 +40,7 @@ public class CdController {
      * @throws JsonProcessingException
      */
     @GetMapping("/delete/{cdId}")
-    public String delete(@PathVariable String cdId) throws JsonProcessingException {
+    public String delete(@PathVariable int cdId) throws JsonProcessingException {
         Result delete = cdService.delete(cdId);
         return CommonUtils.classToJson(delete);
     }
@@ -65,6 +65,18 @@ public class CdController {
      */
     @GetMapping("/query")
     public Result query(){
+
         return cdService.query();
+    }
+
+    /**
+     * 通过id查询歌单
+     * @param cdId
+     * @return
+     */
+    @GetMapping("/queryById/{cdId}")
+    public Result queryById(@PathVariable int cdId){
+        Result result = cdService.queryById(cdId);
+        return result;
     }
 }

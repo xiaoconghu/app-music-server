@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class CdServiceIpml implements ICdService {
@@ -32,7 +34,7 @@ public class CdServiceIpml implements ICdService {
     }
 
     @Override
-    public Result delete(String id) {
+    public Result delete(int id) {
         Cd cd = cdDao.queryById(id);
         if (cd != null) {
             songDao.deleteSongsByCd(id);
@@ -57,11 +59,12 @@ public class CdServiceIpml implements ICdService {
 
     @Override
     public Result query() {
-        return null;
+        List<Cd> query = cdDao.query();
+        return CommonUtils.success(ResultCode.SUCCESS,query);
     }
 
     @Override
-    public Cd queryById(String id) {
-        return null;
+    public Result queryById(int id) {
+        return CommonUtils.success(ResultCode.SUCCESS,cdDao.queryById(id));
     }
 }

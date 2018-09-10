@@ -17,9 +17,24 @@
         <set>
             cd_name=#{cdName},
             cd_pic=#{cdPic},
+            create_user=#{createUser},
+            create_time=#{createTime},
             description=#{description},
         </set>
         WHERE id=#{cdId}
     </update>
+    <select id="query" resultMap="cdMap">
+        SELECT * FROM cd
+    </select>
+    <select id="queryById" resultMap="cdMap">
+        SELECT * FROM cd WHERE id=#{cdId}
+    </select>
+    <resultMap id="cdMap" type="Cd">
+        <result column="id" property="cdId"/>
+        <result column="cd_name" property="cdName"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="description" property="description"/>
+    </resultMap>
 
 </mapper>

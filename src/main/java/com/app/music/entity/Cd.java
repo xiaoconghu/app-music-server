@@ -3,16 +3,10 @@ package com.app.music.entity;
 import java.io.Serializable;
 
 public class Cd implements Serializable {
+    /**
+     * id
+     */
     private int cdId;
-
-    public int getCdId() {
-        return cdId;
-    }
-
-    public void setCdId(int cdId) {
-        this.cdId = cdId;
-    }
-
     /**
      * 歌单名称
      */
@@ -37,6 +31,14 @@ public class Cd implements Serializable {
      * 描述
      */
     private String description;
+
+    public int getCdId() {
+        return cdId;
+    }
+
+    public void setCdId(int cdId) {
+        this.cdId = cdId;
+    }
 
     public String getCdName() {
         return cdName;

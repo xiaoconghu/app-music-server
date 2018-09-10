@@ -40,7 +40,7 @@ public class SongServiceIpml implements ISongService {
     }
 
     @Override
-    public Result delete(String id) {
+    public Result delete(int id) {
         Boolean delete = songDao.delete(id);
 
         return delete ? CommonUtils.success(ResultCode.SUCCESS, null)
@@ -59,11 +59,13 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result query() {
-        return null;
+        List<Song> query = songDao.query();
+        return CommonUtils.success(ResultCode.SUCCESS,query);
     }
 
     @Override
-    public Song queryById(String id) {
-        return null;
+    public Result queryById(int id) {
+        Song song = songDao.queryById(id);
+        return CommonUtils.success(ResultCode.SUCCESS,song);
     }
 }

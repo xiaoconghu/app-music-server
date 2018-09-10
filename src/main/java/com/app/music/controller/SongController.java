@@ -34,7 +34,7 @@ public class SongController {
      * @return
      */
     @DeleteMapping("/delete/{songId}")
-    public Result delete(@PathVariable String songId) {
+    public Result delete(@PathVariable int songId) {
         return songService.delete(songId);
     }
 
@@ -60,6 +60,10 @@ public class SongController {
     @GetMapping("/query")
     public Result query() {
         return songService.query();
+    }
+    @GetMapping("/queryById/{songId}")
+    public Result queryById(@PathVariable int songId){
+        return songService.queryById(songId);
     }
 }
 

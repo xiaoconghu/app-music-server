@@ -42,5 +42,22 @@
             </if>        </set>
         WHERE id = #{id}
     </update>
+    <select id="query" resultMap="songMap">
+        SELECT * FROM song
+    </select>
+    <select id="queryById" resultMap="songMap">
+        SELECT * FROM song WHERE id = #{songId}
+    </select>
+    <resultMap id="songMap" type="Song">
+        <result column="id" property="id"/>
+        <result column="cd_id" property="cdId"/>
+        <result column="song_name" property="songName"/>
+        <result column="song_url" property="songUrl"/>
+        <result column="singer" property="singer"/>
+        <result column="create_time" property="createTime"/>
+        <result column="song_pic" property="songPic"/>
+        <result column="song_type" property="songType"/>
+        <result column="description" property="description"/>
+    </resultMap>
 </mapper>
 

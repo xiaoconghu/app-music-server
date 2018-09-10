@@ -19,7 +19,7 @@ public interface ICommonService<T> {
      * @param id
      * @return
      */
-    Result delete(String id);
+    Result delete(int id);
 
     /**
      * 修改
@@ -41,5 +41,5 @@ public interface ICommonService<T> {
      * @param id
      * @return
      */
-    T queryById(String id);
+    Result queryById(int id);
 }
