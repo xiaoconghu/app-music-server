@@ -3,6 +3,15 @@ package com.app.music.entity;
 import java.io.Serializable;
 
 public class Cd implements Serializable {
+    private int cdId;
+
+    public int getCdId() {
+        return cdId;
+    }
+
+    public void setCdId(int cdId) {
+        this.cdId = cdId;
+    }
 
     /**
      * 歌单名称

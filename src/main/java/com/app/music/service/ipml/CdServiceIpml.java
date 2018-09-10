@@ -47,8 +47,12 @@ public class CdServiceIpml implements ICdService {
 
     @Override
     public Result update(Cd cd) {
-
-        return null;
+        Boolean update = cdDao.update(cd);
+        if(update){
+            return CommonUtils.success(ResultCode.SUCCESS,null);
+        }else {
+            return CommonUtils.failed(ResultCode.NETWORK_ERROR);
+        }
     }
 
     @Override

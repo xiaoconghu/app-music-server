@@ -7,7 +7,19 @@
         VALUES
         (#{cdName},#{createUser},#{createTime},#{cdPic},#{description})
     </insert>
+
     <delete id="delete" parameterType="String">
         DELETE FROM cd WHERE id= #{id}
     </delete>
+
+    <update id="update" parameterType="Cd">
+        UPDATE cd
+        <set>
+            cd_name=#{cdName},
+            cd_pic=#{cdPic},
+            description=#{description},
+        </set>
+        WHERE id=#{cdId}
+    </update>
+
 </mapper>
