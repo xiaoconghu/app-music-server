@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +27,9 @@ public class CdServiceIpml implements ICdService {
 
     @Override
     public Result insert(Cd cd) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createTime = sdf.format(new Date());
+        cd.setCreateTime(createTime);
         Boolean insert = cdDao.insert(cd);
         if (insert) {
             return CommonUtils.success(ResultCode.SUCCESS, null);

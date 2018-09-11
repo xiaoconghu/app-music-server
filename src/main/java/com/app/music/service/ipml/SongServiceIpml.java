@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,6 +32,9 @@ public class SongServiceIpml implements ISongService {
             throw new RuntimeException(e);
         }
         song.setSongUrl(filePath + "\\" + fileName);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createTime = sdf.format(new Date());
+        song.setCreateTime(createTime);
         Boolean aBoolean = songDao.insert(song);
         if (aBoolean) {
             return CommonUtils.success(ResultCode.SUCCESS, null);
