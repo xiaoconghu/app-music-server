@@ -8,12 +8,12 @@
         (#{cdId},#{songName},#{songUrl},#{singer},#{createTime},#{songPic},#{songType},#{description})
     </insert>
 
-    <delete id="deleteSongsByCd" parameterType="String">
+    <delete id="deleteSongsByCd">
         delete from song where id in (
         SELECT * from (select s.id from cd c left join song s on s.cd_id = c.id WHERE c.id = #{id}) a
         )
     </delete>
-    <delete id="delete" parameterType="String">
+    <delete id="delete">
         DELETE  FROM song WHERE id = #{id}
     </delete>
     <update id="update" parameterType="Song">

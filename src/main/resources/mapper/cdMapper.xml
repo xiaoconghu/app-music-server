@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.app.music.dao.ICdDao">
 
-    <insert id="insert" parameterType="Cd">
+    <insert id="insert">
         INSERT INTO cd (cd_name,create_user,create_time,cd_pic,description)
         VALUES
         (#{cdName},#{createUser},#{createTime},#{cdPic},#{description})
     </insert>
 
-    <delete id="delete" parameterType="String">
+    <delete id="delete">
         DELETE FROM cd WHERE id= #{id}
     </delete>
 
-    <update id="update" parameterType="Cd">
+    <update id="update">
         UPDATE cd
         <set>
             cd_name=#{cdName},

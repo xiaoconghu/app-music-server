@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 public class CommonUtils {
+
     /**
      * 把类转为JSON
      * @param c

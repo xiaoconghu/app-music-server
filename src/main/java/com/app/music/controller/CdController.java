@@ -6,6 +6,8 @@ import com.app.music.utils.CommonUtils;
 import com.app.music.utils.Result;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.io.IOException;
 public class CdController {
     @Autowired
     ICdService cdService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 新增歌单
@@ -42,6 +45,7 @@ public class CdController {
     @GetMapping("/delete/{cdId}")
     public String delete(@PathVariable int cdId) throws JsonProcessingException {
         Result delete = cdService.delete(cdId);
+        logger.info(delete.getMsg());
         return CommonUtils.classToJson(delete);
     }
 

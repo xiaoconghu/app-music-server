@@ -6,6 +6,8 @@ import com.app.music.utils.Result;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     IUserService userService;
+    @Autowired
+    JavaMailSender jms;
 
     /**
      * 登录
@@ -99,5 +103,7 @@ public class UserController {
     public Result deleteUserById(@PathVariable String userId) throws JsonProcessingException {
         return userService.deleteUserById(userId);
     }
+
+
 
 }
