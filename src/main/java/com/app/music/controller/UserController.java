@@ -6,12 +6,11 @@ import com.app.music.utils.Result;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,8 +18,6 @@ import java.util.Map;
 public class UserController {
     @Autowired
     IUserService userService;
-    @Autowired
-    JavaMailSender jms;
 
     /**
      * 登录
@@ -39,6 +36,7 @@ public class UserController {
 
     /**
      * 注册
+     *
      * @param params
      * @param request
      * @return
@@ -53,6 +51,7 @@ public class UserController {
 
     /**
      * 登出
+     *
      * @param params
      * @param request
      * @return
@@ -69,6 +68,7 @@ public class UserController {
 
     /**
      * 修改用户
+     *
      * @param params
      * @param request
      * @return
@@ -85,16 +85,18 @@ public class UserController {
 
     /**
      * 获取所有的用户
+     *
      * @return
      * @throws JsonProcessingException
      */
     @GetMapping("/getAllUser")
     public Result getAllUser() throws JsonProcessingException {
-        return  userService.getAllUser();
+        return userService.getAllUser();
     }
 
     /**
      * 通过id删除用户
+     *
      * @param userId
      * @return
      * @throws JsonProcessingException
@@ -104,6 +106,14 @@ public class UserController {
         return userService.deleteUserById(userId);
     }
 
+    @PostMapping("/deleteUserByBatch")
+    public Result deleteUserByBatch(@RequestBody int[] userIds) {
 
+        return userService.deleteUserByBatch(userIds);
+    }
 
+    @GetMapping("/getUserById/{id}")
+    public Result getUserById(@PathVariable("id") int userId) {
+        return userService.getUserById(userId);
+    }
 }

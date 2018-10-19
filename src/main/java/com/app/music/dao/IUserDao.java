@@ -18,7 +18,7 @@ public interface IUserDao {
      *
      * @return User
      */
-    User queryUserByUserId(String userId);
+    User queryUserByUserId(int userId);
 
     /**
      * 查询所有用户
@@ -48,4 +48,9 @@ public interface IUserDao {
      */
     Boolean deleteUserByUserId(String userId);
 
+    /**
+     * 批量删除
+     * @param userIds
+     */
+    void deleteUserByBatch(int[] userIds);
 }

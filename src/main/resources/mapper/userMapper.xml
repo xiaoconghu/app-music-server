@@ -8,11 +8,11 @@
     <select id="queryUserByUserCode" parameterType="String" resultMap="userMap">
         SELECT * FROM user WHERE user_code = #{userCode}
     </select>
-    <select id="queryUserByUserId" parameterType="String" resultMap="userMap">
+    <select id="queryUserByUserId" resultMap="userMap">
         SELECT * FROM user WHERE id = #{userId}
     </select>
     <select id="queryAllUser" resultMap="userMap">
-        SELECT user_code,user_name,phone_number,email,create_time FROM `user`;
+        SELECT id,user_code,user_name,phone_number,email,create_time FROM `user`WHERE user_name!='admin';
     </select>
     <delete id="deleteUserByUserId">
         DELETE FROM user WHERE id = #{userId}
@@ -31,9 +31,20 @@
 
     <resultMap id="userMap" type="User">
         <result column="user_code" property="userCode"/>
+        <result column="id" property="id"/>
         <result column="password" property="password"/>
         <result column="user_name" property="userName"/>
-        <result column="createTime" property="createTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="phone_number" property="phoneNumber"/>
     </resultMap>
+    <!--批量删除-->
+    <delete id="deleteUserByBatch">
+        delete from user
+        where id
+        in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
 

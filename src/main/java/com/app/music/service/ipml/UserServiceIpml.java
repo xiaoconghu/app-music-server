@@ -71,16 +71,16 @@ public class UserServiceIpml implements IUserService {
 
     @Override
     public Result updateUser(Map map, HttpServletRequest request) {
-        String userId = (String) map.get("userId");
+        int userId = (int) map.get("userId");
         User user = IUserDao.queryUserByUserId(userId);
-        if (user != null){
+        if (user != null) {
             Boolean aBoolean = IUserDao.updateUser(map);
-            if(aBoolean){
+            if (aBoolean) {
                 return CommonUtils.success(ResultCode.SUCCESS, null);
-            }else {
+            } else {
                 return CommonUtils.failed(ResultCode.NETWORK_ERROR);
             }
-        }else {
+        } else {
             return CommonUtils.failed(ResultCode.NETWORK_ERROR);
         }
     }
@@ -93,11 +93,23 @@ public class UserServiceIpml implements IUserService {
     @Override
     public Result deleteUserById(String userId) {
         Boolean aBoolean = IUserDao.deleteUserByUserId(userId);
-        if (aBoolean){
-            return CommonUtils.success(ResultCode.SUCCESS,null);
-        }else {
+        if (aBoolean) {
+            return CommonUtils.success(ResultCode.SUCCESS, null);
+        } else {
             return CommonUtils.failed(ResultCode.NETWORK_ERROR);
         }
     }
 
+    @Override
+    public Result deleteUserByBatch(int[] userIds) {
+        IUserDao.deleteUserByBatch(userIds);
+        return CommonUtils.success(ResultCode.SUCCESS, null);
+
+    }
+
+    @Override
+    public Result getUserById(int userId) {
+        User user = IUserDao.queryUserByUserId(userId);
+        return CommonUtils.success(ResultCode.SUCCESS, user);
+    }
 }

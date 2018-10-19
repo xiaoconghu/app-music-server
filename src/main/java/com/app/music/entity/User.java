@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     /**
+     * 用户id
+     */
+    private int id;
+
+    /**
      * 用户登录代码
      */
     private String userCode;
@@ -74,5 +79,13 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

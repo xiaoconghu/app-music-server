@@ -56,4 +56,18 @@ public interface IUserService {
      * @return
      */
     Result deleteUserById(String userId);
+
+    /**
+     * 批量删除用户
+     * @param userIds
+     * @return
+     */
+    Result deleteUserByBatch(int[] userIds);
+
+    /**
+     * 获取单个user
+     * @param userId
+     * @return
+     */
+    Result getUserById(int userId);
 }
