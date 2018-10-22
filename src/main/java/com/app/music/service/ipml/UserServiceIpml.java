@@ -22,6 +22,8 @@ public class UserServiceIpml implements IUserService {
 
     @Override
     public Result login(Map map, HttpServletRequest request) throws JsonProcessingException {
+        String ipAddr = CommonUtils.getIpAddr(request);
+        System.out.println(ipAddr);
         String userCode = (String) map.get("userCode");
         String password = (String) map.get("password");
         User user = IUserDao.queryUserByUserCode(userCode);
