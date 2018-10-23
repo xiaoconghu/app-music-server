@@ -22,9 +22,11 @@ public class SongController {
      * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public Result insert(MultipartFile file, Song song) throws IOException {
-        song.setFile(file);
-        return songService.insert(song);
+    public Result insert(MultipartFile file, String song) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Song _song = mapper.readValue(song, Song.class);
+        _song.setFile(file);
+        return songService.insert(_song);
     }
 
     /**
