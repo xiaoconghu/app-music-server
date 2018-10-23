@@ -40,6 +40,11 @@ public class SongController {
         return songService.delete(songId);
     }
 
+    @PostMapping("/deleteByBatch")
+    public Result deleteByBatch(@RequestBody String[] arr) {
+        return songService.deleteByBatch(arr);
+    }
+
     /**
      * 修改歌曲
      *
@@ -63,8 +68,9 @@ public class SongController {
     public Result query() {
         return songService.query();
     }
+
     @GetMapping("/queryById/{songId}")
-    public Result queryById(@PathVariable int songId){
+    public Result queryById(@PathVariable int songId) {
         return songService.queryById(songId);
     }
 }

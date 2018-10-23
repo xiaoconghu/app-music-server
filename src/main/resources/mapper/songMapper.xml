@@ -39,7 +39,8 @@
             </if>
             <if test="description!=null">
                 description = #{description},
-            </if>        </set>
+            </if>
+        </set>
         WHERE id = #{id}
     </update>
     <select id="query" resultMap="songMap">
@@ -59,5 +60,13 @@
         <result column="song_type" property="songType"/>
         <result column="description" property="description"/>
     </resultMap>
+    <delete id="deleteByBatch">
+        delete from song
+        where id
+        in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
 

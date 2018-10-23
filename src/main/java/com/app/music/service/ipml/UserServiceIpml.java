@@ -73,7 +73,7 @@ public class UserServiceIpml implements IUserService {
 
     @Override
     public Result updateUser(Map map, HttpServletRequest request) {
-        int userId = (int) map.get("userId");
+        int userId = Integer.parseInt(map.get("userId").toString());
         User user = IUserDao.queryUserByUserId(userId);
         if (user != null) {
             Boolean aBoolean = IUserDao.updateUser(map);

@@ -65,12 +65,18 @@ public class SongServiceIpml implements ISongService {
     @Override
     public Result query() {
         List<Song> query = songDao.query();
-        return CommonUtils.success(ResultCode.SUCCESS,query);
+        return CommonUtils.success(ResultCode.SUCCESS, query);
     }
 
     @Override
     public Result queryById(int id) {
         Song song = songDao.queryById(id);
-        return CommonUtils.success(ResultCode.SUCCESS,song);
+        return CommonUtils.success(ResultCode.SUCCESS, song);
+    }
+
+    @Override
+    public Result deleteByBatch(String[] arr) {
+        songDao.deleteByBatch(arr);
+        return CommonUtils.success(ResultCode.SUCCESS, null);
     }
 }
