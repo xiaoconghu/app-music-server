@@ -3,9 +3,9 @@
 <mapper namespace="com.app.music.dao.ISongDao">
 
     <insert id="insert" parameterType="Song">
-        INSERT INTO song (cd_id,song_name,song_url,singer,create_time,song_pic,song_type,description)
+        INSERT INTO song (cd_id,song_name,song_url,singer,song_pic,song_type,description)
          VALUES
-        (#{cdId},#{songName},#{songUrl},#{singer},#{createTime},#{songPic},#{songType},#{description})
+        (#{cdId},#{songName},#{songUrl},#{singer},#{songPic},#{songType},#{description})
     </insert>
 
     <delete id="deleteSongsByCd">

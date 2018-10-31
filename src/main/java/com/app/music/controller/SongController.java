@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("/music/song")
@@ -67,6 +70,17 @@ public class SongController {
     @GetMapping("/query")
     public Result query() {
         return songService.query();
+    }
+
+    @RequestMapping(value="/media/{songId}", method=RequestMethod.GET)
+    public void getDownload(@PathVariable int songId, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            songService.getDownload(songId,request,response);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        // Get your file stream from wherever.
+
     }
 
     @GetMapping("/queryById/{songId}")

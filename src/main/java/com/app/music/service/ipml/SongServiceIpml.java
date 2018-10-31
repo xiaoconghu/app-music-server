@@ -6,12 +6,14 @@ import com.app.music.service.ISongService;
 import com.app.music.utils.CommonUtils;
 import com.app.music.utils.Result;
 import com.app.music.utils.ResultCode;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 @Service
@@ -21,7 +23,7 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result insert(Song song) throws IOException {
-        String filePath = "G:\\music";
+        String filePath = "/Users/aaa/WebstormProjects";
         String originalFilename = song.getFile().getOriginalFilename();
         String regex = "\\.";
         String[] split = originalFilename.split(regex);
@@ -31,10 +33,10 @@ public class SongServiceIpml implements ISongService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        song.setSongUrl(filePath + "\\" + fileName);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        song.setSongUrl(filePath + "/" + fileName);
+        /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createTime = sdf.format(new Date());
-        song.setCreateTime(createTime);
+        song.setCreateTime(new Date());*/
         Boolean aBoolean = songDao.insert(song);
         if (aBoolean) {
             return CommonUtils.success(ResultCode.SUCCESS, null);
@@ -78,5 +80,32 @@ public class SongServiceIpml implements ISongService {
     public Result deleteByBatch(String[] arr) {
         songDao.deleteByBatch(arr);
         return CommonUtils.success(ResultCode.SUCCESS, null);
+    }
+
+    @Override
+    public void getDownload(int songId, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        Song song = songDao.queryById(songId);
+        String fullPath = song.getSongUrl();
+        File downloadFile = new File(fullPath);
+        ServletContext context = request.getServletContext();
+        String mimeType = context.getMimeType(fullPath);
+        if (mimeType == null) {
+            mimeType = "application/octet-stream";
+            System.out.println("context getMimeType is null");
+        }
+        System.out.println("MIME type: " + mimeType);
+
+        response.setContentType(mimeType);
+        response.setContentLength((int) downloadFile.length());
+        response.addHeader("Content-Disposition", "attachment;fileName=" + new String(downloadFile.getName()
+                .getBytes("UTF-8"), "iso-8859-1"));
+
+        try {
+            InputStream myStream = new FileInputStream(fullPath);
+            IOUtils.copy(myStream, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
