@@ -23,7 +23,7 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result insert(Song song) throws IOException {
-        String filePath = "/Users/aaa/WebstormProjects";
+        String filePath = "G:/music";
         String originalFilename = song.getFile().getOriginalFilename();
         String regex = "\\.";
         String[] split = originalFilename.split(regex);
@@ -97,8 +97,8 @@ public class SongServiceIpml implements ISongService {
 
         response.setContentType(mimeType);
         response.setContentLength((int) downloadFile.length());
-        response.addHeader("Content-Disposition", "attachment;fileName=" + new String(downloadFile.getName()
-                .getBytes("UTF-8"), "iso-8859-1"));
+        /*response.addHeader("Content-Disposition", "attachment;fileName=" + new String(downloadFile.getName()
+                .getBytes("UTF-8"), "iso-8859-1"));*/
 
         try {
             InputStream myStream = new FileInputStream(fullPath);
@@ -107,5 +107,6 @@ public class SongServiceIpml implements ISongService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.err.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
 }

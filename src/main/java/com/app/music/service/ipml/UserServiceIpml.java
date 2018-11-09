@@ -9,8 +9,10 @@ import com.app.music.utils.Result;
 import com.app.music.utils.ResultCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -19,8 +21,11 @@ import java.util.*;
 public class UserServiceIpml implements IUserService {
     @Autowired
     private IUserDao IUserDao;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Override
+
     public Result login(Map map, HttpServletRequest request) throws JsonProcessingException {
         String ipAddr = CommonUtils.getIpAddr(request);
         System.out.println(ipAddr);
@@ -39,6 +44,10 @@ public class UserServiceIpml implements IUserService {
             stringStringMap.put("user", s);
             ArrayList<User> list = new ArrayList<>();
             list.add(user);
+//            User user1 = (User) redisTemplate.opsForValue().get("user");
+//            System.out.println(user1.toString());
+//            redisTemplate.opsForValue().set("user", user);
+//            Object user2 = redisTemplate.opsForValue().get("user");
 
             return CommonUtils.success(ResultCode.SUCCESS, list);
         }
