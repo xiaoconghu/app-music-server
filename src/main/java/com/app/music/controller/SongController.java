@@ -4,6 +4,8 @@ import com.app.music.entity.Song;
 import com.app.music.service.ISongService;
 import com.app.music.utils.Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 public class SongController {
     @Autowired
     ISongService songService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 上传歌曲
@@ -77,6 +80,8 @@ public class SongController {
         try {
             songService.getDownload(songId,request,response);
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         // Get your file stream from wherever.

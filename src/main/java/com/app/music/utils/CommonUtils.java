@@ -2,12 +2,15 @@ package com.app.music.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 
 public class CommonUtils {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 把类转为JSON
@@ -61,6 +64,19 @@ public class CommonUtils {
         out.write(file);
         out.flush();
         out.close();
+    }
+
+    public static String deleteFile(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            if (file.delete()) {
+                return "删除成功";
+            } else {
+                return "删除失败";
+            }
+        } else {
+            return "文件不存在";
+        }
     }
 
     public static String getIpAddr(HttpServletRequest request) {

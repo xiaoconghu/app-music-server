@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
+import java.util.UUID;
 
 public class demo {
     public static void main(String[] args) {
@@ -32,6 +33,9 @@ class demo2 {
     public static void main(String[] args) {
         getDiskInfo();
         getMemInfo();
+        // 获取uuid
+        String Str1 = UUID.randomUUID().toString().replace("-", "");
+        System.out.println(Str1);
     }
 
     public static void getDiskInfo() {
