@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nw-form (formInstance)=\"formInstance($event)\" [column]=\"column\"></nw-form>\r\n<label for=\"songFile\">\r\n  上传音乐\r\n</label>\r\n<input name=\"file\" type=\"file\" id=\"songFile\" (change)=\"change($event)\"/>\r\n<button nz-button nzType=\"primary\" (click)=\"save()\" style=\"margin-right: 20px\">保存</button>\r\n<button nz-button nzType=\"default\">返回</button>\r\n"
+module.exports = "<app-nw-form (formInstance)=\"formInstance($event)\" [column]=\"column\"></app-nw-form>\n<label for=\"songFile\">\n  上传音乐\n</label>\n<input name=\"file\" type=\"file\" id=\"songFile\" (change)=\"change($event)\"/>\n<button nz-button nzType=\"primary\" (click)=\"save()\" style=\"margin-right: 20px\">保存</button>\n<button nz-button nzType=\"default\" (click)=\"goBack()\">返回</button>\n"
 
 /***/ }),
 
@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MusicDetailComponent", function() { return MusicDetailComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _core_api_service_music_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core/api-service/music.service */ "./src/app/core/api-service/music.service.ts");
-/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/esm5/antd.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -95,6 +95,9 @@ var MusicDetailComponent = /** @class */ (function () {
             });
         }
         else {
+            var a = { name: 'sss', age: 12 };
+            var name_1 = a.name;
+            console.log(name_1);
             var _bod = this.formOperate.getData();
             var body = new FormData();
             body.append('file', this.songFile);
@@ -106,6 +109,9 @@ var MusicDetailComponent = /** @class */ (function () {
                 _this.message.error(err.msg);
             });
         }
+    };
+    MusicDetailComponent.prototype.goBack = function () {
+        history.go(-1);
     };
     MusicDetailComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -132,7 +138,7 @@ var MusicDetailComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"box-warp\">\r\n  <div style=\"box-shadow: 0 1px 2px rgba(0,0,0,.15), 0 -1px 0 rgba(0,0,0,.02);\">\r\n    <app-table [dataSet]=\"dataSet\"\r\n               [pageBean]=\"pageBean\"\r\n               [tableConfig]=\"tableConfig\"\r\n               (pageChange)=\"pageChange($event)\"\r\n    ></app-table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"box-warp\">\n  <div style=\"box-shadow: 0 1px 2px rgba(0,0,0,.15), 0 -1px 0 rgba(0,0,0,.02);\">\n    <app-table [dataSet]=\"dataSet\"\n               [pageBean]=\"pageBean\"\n               [tableConfig]=\"tableConfig\"\n               (pageChange)=\"pageChange($event)\"\n    ></app-table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -161,7 +167,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _core_entity_pageBean__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../core/entity/pageBean */ "./src/app/core/entity/pageBean.ts");
 /* harmony import */ var _core_api_service_music_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../core/api-service/music.service */ "./src/app/core/api-service/music.service.ts");
-/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/esm5/antd.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
+/* harmony import */ var _core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../core/mission/music-mission.service */ "./src/app/core/mission/music-mission.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -176,11 +183,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var MusicListComponent = /** @class */ (function () {
-    function MusicListComponent($router, musicService, message) {
+    function MusicListComponent($router, musicService, message, mission) {
         this.$router = $router;
         this.musicService = musicService;
         this.message = message;
+        this.mission = mission;
         this.dataSet = [];
         this.pageBean = new _core_entity_pageBean__WEBPACK_IMPORTED_MODULE_2__["PageBean"](10, 1, 1);
     }
@@ -204,6 +213,13 @@ var MusicListComponent = /** @class */ (function () {
                     handle: function (currentIndex) {
                         console.log(currentIndex);
                         _this.deleteMusic(currentIndex.id);
+                    }
+                },
+                {
+                    text: '播放',
+                    handle: function (currentIndex) {
+                        console.log(currentIndex);
+                        _this.playMusic(currentIndex);
                     }
                 },
                 {
@@ -239,7 +255,6 @@ var MusicListComponent = /** @class */ (function () {
         var _this = this;
         this.musicService.getMusicList().then(function (re) {
             _this.dataSet = re.data;
-            _this.message.success(re.msg);
         }, function (err) {
             _this.message.error(err.msg);
         });
@@ -247,6 +262,7 @@ var MusicListComponent = /** @class */ (function () {
     MusicListComponent.prototype.deleteMusic = function (id) {
         var _this = this;
         this.musicService.deleteMusicById(id).then(function (result) {
+            _this.message.success(result.msg);
             _this.getMusicList();
         }, function (err) {
             _this.message.error(err.msg);
@@ -258,6 +274,9 @@ var MusicListComponent = /** @class */ (function () {
             _this.getMusicList();
         });
     };
+    MusicListComponent.prototype.playMusic = function (currentMusic) {
+        this.mission.commitMusic(currentMusic);
+    };
     MusicListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-music-list',
@@ -266,7 +285,8 @@ var MusicListComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _core_api_service_music_service__WEBPACK_IMPORTED_MODULE_3__["MusicService"],
-            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_4__["NzMessageService"]])
+            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_4__["NzMessageService"],
+            _core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_5__["MusicMissionService"]])
     ], MusicListComponent);
     return MusicListComponent;
 }());
@@ -282,7 +302,7 @@ var MusicListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  music works!\r\n</p>\r\n"
+module.exports = "<p>\n  music works!\n</p>\n"
 
 /***/ }),
 
@@ -308,6 +328,7 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MusicComponent", function() { return MusicComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/mission/music-mission.service */ "./src/app/core/mission/music-mission.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -318,10 +339,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var MusicComponent = /** @class */ (function () {
-    function MusicComponent() {
+    function MusicComponent(mission) {
+        this.mission = mission;
     }
     MusicComponent.prototype.ngOnInit = function () {
+        this.mission.musicChange.subscribe(function (e) {
+            console.log(e);
+        });
     };
     MusicComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -329,7 +355,7 @@ var MusicComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./music.component.html */ "./src/app/component/music/music.component.html"),
             styles: [__webpack_require__(/*! ./music.component.less */ "./src/app/component/music/music.component.less")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_1__["MusicMissionService"]])
     ], MusicComponent);
     return MusicComponent;
 }());

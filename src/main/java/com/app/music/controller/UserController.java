@@ -5,12 +5,13 @@ import com.app.music.service.IUserService;
 import com.app.music.utils.Result;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,18 +19,21 @@ import java.util.Map;
 public class UserController {
     @Autowired
     IUserService userService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     /**
      * 登录
      *
-     * @param params
-     * @param request
+     * @param params dd
+     * @param request dd
      * @return String
      * @throws JsonProcessingException
      */
     @PostMapping("/login")
     public Result login(@RequestBody String params, HttpServletRequest request) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        logger.info("正在请求登陆接口");
         Map map = mapper.readValue(params, Map.class);
         return userService.login(map, request);
     }

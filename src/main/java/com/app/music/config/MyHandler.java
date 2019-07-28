@@ -45,7 +45,7 @@ public class MyHandler implements WebSocketHandler {
 
             System.out.println(map.get("id"));
             System.out.println(map.get("message") + ":来自" + (String) webSocketSession.getAttributes().get("WEBSOCKET_USERID") + "的消息");
-            sendMessageToUser(map.get("id") + "", new TextMessage("服务器收到"+map.get("message")+"了，hello!"));
+            sendMessageToUser(map.get("toId") + "", new TextMessage("服务器收到"+map.get("message")+"了，hello!"));
         } catch (Exception e) {
             e.printStackTrace();
         }

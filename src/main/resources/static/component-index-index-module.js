@@ -77,7 +77,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.component */ "./src/app/component/index/index.component.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _index_routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index.routes */ "./src/app/component/index/index.routes.ts");
-/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/esm5/antd.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login/login.component */ "./src/app/component/login/login.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -159,7 +159,7 @@ var ROUTER_CONFIG = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div style=\"margin: 200px auto;\">\r\n    <div style=\"text-align: center;color: beige\">WEB音乐网管系统</div>\r\n    <form class=\"login-form\" style=\"margin:0 auto;\" nz-form [formGroup]=\"validateForm\" class=\"login-form\"\r\n          (ngSubmit)=\"submitForm()\">\r\n      <nz-form-item>\r\n        <nz-form-control>\r\n          <nz-input-group nzPrefixIcon=\"anticon anticon-user\">\r\n            <input type=\"text\" nz-input formControlName=\"userCode\" placeholder=\"userCode\">\r\n          </nz-input-group>\r\n          <nz-form-explain *ngIf=\"validateForm.get('userCode').dirty && validateForm.get('userCode').errors\">Please input\r\n            your username!\r\n          </nz-form-explain>\r\n        </nz-form-control>\r\n      </nz-form-item>\r\n      <nz-form-item>\r\n        <nz-form-control>\r\n          <nz-input-group nzPrefixIcon=\"anticon anticon-lock\">\r\n            <input type=\"password\" nz-input formControlName=\"password\" placeholder=\"Password\">\r\n          </nz-input-group>\r\n          <nz-form-explain *ngIf=\"validateForm.get('password').dirty && validateForm.get('password').errors\">Please input\r\n            your Password!\r\n          </nz-form-explain>\r\n        </nz-form-control>\r\n      </nz-form-item>\r\n      <nz-form-item>\r\n        <nz-form-control>\r\n          <label nz-checkbox formControlName=\"remember\">\r\n            <span>Remember me</span>\r\n          </label>\r\n          <a class=\"login-form-forgot\" class=\"login-form-forgot\">Forgot password</a>\r\n          <button nz-button class=\"login-form-button\" [nzType]=\"'primary'\">Log in</button>\r\n          Or\r\n          <a href=\"\">register now!</a>\r\n        </nz-form-control>\r\n      </nz-form-item>\r\n    </form>\r\n  </div>\r\n\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"container\">\n  <div style=\"margin: 200px auto;\">\n    <div style=\"text-align: center;color: beige\">WEB音乐网管系统</div>\n    <form class=\"login-form\" style=\"margin:0 auto;\" nz-form [formGroup]=\"validateForm\" class=\"login-form\"\n          (ngSubmit)=\"submitForm()\">\n      <nz-form-item>\n        <nz-form-control>\n          <nz-input-group nzPrefixIcon=\"anticon anticon-user\">\n            <input type=\"text\" nz-input formControlName=\"userCode\" placeholder=\"userCode\">\n          </nz-input-group>\n          <nz-form-explain *ngIf=\"validateForm.get('userCode').dirty && validateForm.get('userCode').errors\">Please input\n            your username!\n          </nz-form-explain>\n        </nz-form-control>\n      </nz-form-item>\n      <nz-form-item>\n        <nz-form-control>\n          <nz-input-group nzPrefixIcon=\"anticon anticon-lock\">\n            <input type=\"password\" nz-input formControlName=\"password\" placeholder=\"Password\">\n          </nz-input-group>\n          <nz-form-explain *ngIf=\"validateForm.get('password').dirty && validateForm.get('password').errors\">Please input\n            your Password!\n          </nz-form-explain>\n        </nz-form-control>\n      </nz-form-item>\n      <nz-form-item>\n        <nz-form-control>\n          <label nz-checkbox formControlName=\"remember\">\n            <span>Remember me</span>\n          </label>\n          <a class=\"login-form-forgot\" class=\"login-form-forgot\">Forgot password</a>\n          <button nz-button class=\"login-form-button\" [nzType]=\"'primary'\">Log in</button>\n          Or\n          <a href=\"\">register now!</a>\n        </nz-form-control>\n      </nz-form-item>\n    </form>\n  </div>\n\n</div>\n\n"
 
 /***/ }),
 
@@ -188,6 +188,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _core_api_service_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/api-service/user.service */ "./src/app/core/api-service/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -204,25 +205,33 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(fb, userService, router) {
+    function LoginComponent(fb, userService, message, router) {
         this.fb = fb;
         this.userService = userService;
+        this.message = message;
         this.router = router;
     }
     LoginComponent.prototype.submitForm = function () {
         var _this = this;
-        for (var i in this.validateForm.controls) {
-            this.validateForm.controls[i].markAsDirty();
-            this.validateForm.controls[i].updateValueAndValidity();
+        if (this.validateForm.controls) {
+            for (var _i = 0, _a = Object.keys(this.validateForm.controls); _i < _a.length; _i++) {
+                var key = _a[_i];
+                this.validateForm.controls[key].markAsDirty();
+                this.validateForm.controls[key].updateValueAndValidity();
+            }
         }
         if (this.validateForm.valid) {
             this.userService.login(this.validateForm.getRawValue()).then(function (e) {
                 console.log(e);
+                _this.message.success(e.msg);
                 if (e.code === 0) {
-                    _this.router.navigate(['user/user-list']).then(function (e) {
+                    _this.router.navigate(['user/user-list']).then(function () {
                     });
                 }
+            }, function (err) {
+                _this.message.error(err.msg);
             });
         }
     };
@@ -241,6 +250,7 @@ var LoginComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
             _core_api_service_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"],
+            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_4__["NzMessageService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], LoginComponent);
     return LoginComponent;

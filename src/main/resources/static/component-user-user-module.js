@@ -1,5 +1,355 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["component-user-user-module"],{
 
+/***/ "./src/app/component/play/play-progress/draggable.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/component/play/play-progress/draggable.ts ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Created by xiaoconghu on 2018/5/11.
+ */
+var isDragging = false;
+var supportTouch = false;
+/* harmony default export */ __webpack_exports__["default"] = (function (element, options) {
+    var moveFn = function (event) {
+        if (options.drag) {
+            options.drag(supportTouch ? event.changedTouches[0] || event.touches[0] : event);
+        }
+    };
+    var endFn = function (event) {
+        if (!supportTouch) {
+            document.removeEventListener('mousemove', moveFn);
+            document.removeEventListener('mouseup', endFn);
+        }
+        document.onselectstart = null;
+        document.ondragstart = null;
+        isDragging = false;
+        if (options.end) {
+            options.end(supportTouch ? event.changedTouches[0] || event.touches[0] : event);
+        }
+    };
+    element.addEventListener(supportTouch ? 'touchstart' : 'mousedown', function (event) {
+        if (isDragging) {
+            return;
+        }
+        event.preventDefault();
+        document.onselectstart = function () {
+            return false;
+        };
+        document.ondragstart = function () {
+            return false;
+        };
+        if (!supportTouch) {
+            document.addEventListener('mousemove', moveFn);
+            document.addEventListener('mouseup', endFn);
+        }
+        isDragging = true;
+        if (options.start) {
+            options.start(supportTouch ? event.changedTouches[0] || event.touches[0] : event);
+        }
+    });
+    if (supportTouch) {
+        element.addEventListener('touchmove', moveFn);
+        element.addEventListener('touchend', endFn);
+        element.addEventListener('touchcancel', endFn);
+    }
+});
+
+
+/***/ }),
+
+/***/ "./src/app/component/play/play-progress/play-progress.component.html":
+/*!***************************************************************************!*\
+  !*** ./src/app/component/play/play-progress/play-progress.component.html ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n  <div class=\"range\">\n    <div class=\"range-content\" id=\"content\">\n      <div class=\"range-runway\" id=\"runWay\" style=\"border-top-width: 8px;\">\n      </div>\n      <div class=\"range-progress\" id=\"progress\" [ngStyle]=\"{width:value+'%',height:'8px'}\" >\n      </div>\n      <div class=\"range-thumb\" id=\"thumb\" [ngStyle]=\"{left:value+'%'}\"></div>\n    </div>\n  </div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/component/play/play-progress/play-progress.component.less":
+/*!***************************************************************************!*\
+  !*** ./src/app/component/play/play-progress/play-progress.component.less ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".range {\n  position: relative;\n  display: flex;\n  height: 30px;\n  line-height: 30px;\n}\n.range-content {\n  margin: 21px 15px;\n  position: relative;\n  flex: 1;\n  /*margin-right: 30px;*/\n}\n.range-runway {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  transform: translateY(-50%);\n  left: 0;\n  right: 0;\n  border-top-color: #a9acb1;\n  border-top-style: solid;\n}\n.range-progress {\n  position: absolute;\n  display: block;\n  background-color: #26a2ff;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  transform: translateY(-50%);\n  width: 0;\n}\n.range-thumb {\n  background-color: #ffcd32;\n  background-clip: content-box;\n  position: absolute;\n  padding: 3px;\n  left: 0;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n  transform: translateY(-50%);\n  width: 16px;\n  height: 16px;\n  border: 1px solid #ccc;\n  border-radius: 100%;\n  cursor: move;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/component/play/play-progress/play-progress.component.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/component/play/play-progress/play-progress.component.ts ***!
+  \*************************************************************************/
+/*! exports provided: PlayProgressComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayProgressComponent", function() { return PlayProgressComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _draggable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./draggable */ "./src/app/component/play/play-progress/draggable.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PlayProgressComponent = /** @class */ (function () {
+    function PlayProgressComponent() {
+        this.value = 0;
+        this.min = 0;
+        this.max = 100;
+        this.step = 1;
+        this.disabled = false;
+        this.barHeight = 1;
+        this.dragEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.dragEndEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    PlayProgressComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var thumb = document.getElementById('thumb');
+        var content = document.getElementById('content');
+        var getThumbPosition = function () {
+            var contentBox = content.getBoundingClientRect();
+            var thumbBox = thumb.getBoundingClientRect();
+            return {
+                left: thumbBox.left - contentBox.left,
+                top: thumbBox.top - contentBox.top,
+                thumbBoxLeft: thumbBox.left
+            };
+        };
+        var dragState = {};
+        Object(_draggable__WEBPACK_IMPORTED_MODULE_1__["default"])(thumb, {
+            start: function (event) {
+                if (_this.disabled) {
+                    return;
+                }
+                var position = getThumbPosition();
+                var thumbClickDetalX = event.clientX - position.thumbBoxLeft;
+                dragState = {
+                    thumbStartLeft: position.left,
+                    thumbStartTop: position.top,
+                    thumbClickDetalX: thumbClickDetalX
+                };
+            },
+            drag: function (event) {
+                if (_this.disabled) {
+                    return;
+                }
+                var contentBox = content.getBoundingClientRect();
+                var deltaX = event.pageX - contentBox.left - dragState.thumbStartLeft - dragState.thumbClickDetalX;
+                var stepCount = Math.ceil((_this.max - _this.min) / _this.step);
+                var __newPosition = (dragState.thumbStartLeft + deltaX) - (dragState.thumbStartLeft + deltaX) % (contentBox.width / stepCount);
+                var newProgress = __newPosition / contentBox.width;
+                if (newProgress < 0) {
+                    newProgress = 0;
+                }
+                else if (newProgress > 1) {
+                    newProgress = 1;
+                }
+                _this.currentValue = Math.round(_this.min + newProgress * (_this.max - _this.min));
+                _this.dragEvent.emit({ currentTime: Math.round(_this.min + newProgress * (_this.max - _this.min)) });
+            },
+            end: function () {
+                if (_this.disabled) {
+                    return;
+                }
+                _this.dragEndEvent.emit({ currentTime: _this.currentValue });
+                dragState = {};
+            }
+        });
+        var that = this;
+        var newPosition = function (event) {
+            var contentBox = content.getBoundingClientRect();
+            var deltaX = event.pageX - contentBox.left - thumb.offsetWidth;
+            var stepCount = Math.ceil((that.max - that.min) / that.step);
+            var _newPosition = deltaX - (deltaX) % (contentBox.width / stepCount);
+            var newProgress = _newPosition / contentBox.width;
+            that.dragEndEvent.emit({ currentTime: Math.round(that.min + newProgress * (that.max - that.min)) });
+        };
+        var runWay = document.getElementById('runWay');
+        runWay.addEventListener('click', newPosition);
+        var progress = document.getElementById('progress');
+        progress.addEventListener('click', newPosition);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "value", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "min", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "max", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "step", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "disabled", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "barHeight", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "dragEvent", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], PlayProgressComponent.prototype, "dragEndEvent", void 0);
+    PlayProgressComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-play-progress',
+            template: __webpack_require__(/*! ./play-progress.component.html */ "./src/app/component/play/play-progress/play-progress.component.html"),
+            styles: [__webpack_require__(/*! ./play-progress.component.less */ "./src/app/component/play/play-progress/play-progress.component.less")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PlayProgressComponent);
+    return PlayProgressComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/component/play/play.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/component/play/play.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div style=\"position: fixed;bottom: 0;\n    left: 0;width: 100%\" [hidden]=\"!playBoxShow\">\n  <div style=\"height: 55px;\n      background-color: #32ab7a;display: flex\">\n    <div style=\"    padding: 0 20px;\">\n      <i class=\"controls\" nz-icon type=\"retweet\" theme=\"outline\"></i>\n      <i class=\"controls\" nz-icon type=\"left-circle\" theme=\"outline\"></i>\n      <i class=\"controls\" nz-icon type=\"play-circle\" [hidden]=\"isPlay\" (click)=\"clickPlay()\" theme=\"outline\"></i>\n      <i class=\"controls\" nz-icon type=\"pause-circle\" [hidden]=\"!isPlay\" (click)=\"clickPlay()\" theme=\"outline\"></i>\n      <i class=\"controls\" nz-icon type=\"right-circle\" theme=\"outline\"></i>\n      <i class=\"controls\" nz-icon type=\"download\" theme=\"outline\"></i>\n    </div>\n    <div style=\"flex: 1;\n    padding: 0 32px;\n    line-height: 44px;display: flex\">\n      <span>{{currentTime*1000|timePipe}}</span>\n      <!--<nz-progress style=\"flex: 1;margin: 0 20px\" [nzPercent]=\"(currentTime/playTime)*100\"-->\n      <!--[nzShowInfo]=\"false\"></nz-progress>-->\n      <app-play-progress style=\"flex: 1;margin: 0 20px\"\n                         [value]=\"(currentTime/playTime)*100\"\n                         [max]=\"playTime\"\n                         [min]=\"0\"\n                         [step]=\"1\"\n                         [barHeight]=\"1\"\n                         [disabled]=\"false\"\n                         (dragEvent)=\"rangeChange($event)\"\n                         (dragEndEvent)=\"rangeChangeEnd($event)\"\n      ></app-play-progress>\n      <span>{{playTime*1000|timePipe}}</span>\n    </div>\n    <audio style=\"text-align: center;margin: 0 auto\"\n           id=\"play\"\n           (ended)=\"ended()\"\n           (play)='songReady($event)'\n           [src]=\"playUrl\"\n           (canplay)=\"canPlay($event)\"\n           (timeupdate)=\"timeUpdate($event)\"\n    ></audio>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/component/play/play.component.less":
+/*!****************************************************!*\
+  !*** ./src/app/component/play/play.component.less ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".controls {\n  font-size: 45px;\n  line-height: 63px;\n  margin-right: 10px;\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/component/play/play.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/component/play/play.component.ts ***!
+  \**************************************************/
+/*! exports provided: PlayComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayComponent", function() { return PlayComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/mission/music-mission.service */ "./src/app/core/mission/music-mission.service.ts");
+/* harmony import */ var _core_entity_music__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/entity/music */ "./src/app/core/entity/music.ts");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var PlayComponent = /** @class */ (function () {
+    function PlayComponent(mission, message) {
+        this.mission = mission;
+        this.message = message;
+        this.song = new _core_entity_music__WEBPACK_IMPORTED_MODULE_2__["Music"]();
+    }
+    PlayComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.audio = document.getElementById('play');
+        this.mission.musicChange.subscribe(function (currentMusic) {
+            _this.song = currentMusic;
+            _this.playUrl = "/music/song/media/" + currentMusic.id;
+            _this.isPlay = true;
+            _this.playBoxShow = true;
+            setTimeout(function (e) {
+                _this.audio.play();
+            });
+        });
+    };
+    PlayComponent.prototype.ngAfterViewInit = function () {
+    };
+    PlayComponent.prototype.songReady = function (e) {
+        this.message.success('开始播放歌曲');
+    };
+    PlayComponent.prototype.ended = function () {
+    };
+    PlayComponent.prototype.timeUpdate = function (e) {
+        this.currentTime = e.target.currentTime;
+    };
+    PlayComponent.prototype.canPlay = function (e) {
+        this.playTime = e.target.duration;
+    };
+    PlayComponent.prototype.clickPlay = function () {
+        this.isPlay = !this.isPlay;
+        this.audio[this.isPlay ? 'play' : 'pause']();
+    };
+    PlayComponent.prototype.rangeChange = function (evt) {
+        this.currentTime = evt.currentTime;
+        if (this.isPlay) {
+            this.audio.pause();
+            this.isPlay = false;
+        }
+        this.audio.currentTime = evt.currentTime;
+    };
+    PlayComponent.prototype.rangeChangeEnd = function (evt) {
+        var _this = this;
+        console.log('拖拽结束', evt.currentTime);
+        this.currentTime = evt.currentTime;
+        this.audio.currentTime = evt.currentTime;
+        setTimeout(function (e) {
+            _this.audio.play();
+        });
+    };
+    PlayComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-play',
+            template: __webpack_require__(/*! ./play.component.html */ "./src/app/component/play/play.component.html"),
+            styles: [__webpack_require__(/*! ./play.component.less */ "./src/app/component/play/play.component.less")]
+        }),
+        __metadata("design:paramtypes", [_core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_1__["MusicMissionService"],
+            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_3__["NzMessageService"]])
+    ], PlayComponent);
+    return PlayComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/component/user/add-user/add-user.component.html":
 /*!*****************************************************************!*\
   !*** ./src/app/component/user/add-user/add-user.component.html ***!
@@ -67,24 +417,25 @@ var AddUserComponent = /** @class */ (function () {
     }
     AddUserComponent.prototype.submitForm = function () {
         var _this = this;
-        for (var i in this.validateForm.controls) {
+        for (var _i = 0, _a = Object.keys(this.validateForm.controls); _i < _a.length; _i++) {
+            var i = _a[_i];
             this.validateForm.controls[i].markAsDirty();
             this.validateForm.controls[i].updateValueAndValidity();
         }
         console.log(this.validateForm);
         if (this.validateForm.valid) {
-            var _a = this.validateForm.getRawValue(), email = _a.email, password = _a.password, userCode = _a.userCode, userName = _a.userName, phoneNumber = _a.phoneNumber;
+            var _b = this.validateForm.getRawValue(), email = _b.email, password = _b.password, userCode = _b.userCode, userName = _b.userName, phoneNumber = _b.phoneNumber;
             if (this.type === 'update') {
                 var obj = { email: email, password: password, userCode: userCode, userName: userName, phoneNumber: phoneNumber };
                 obj['userId'] = this.id;
                 this.userService.updateUser(obj).then(function (res) {
-                    _this.router.navigate(['/user/user-list']);
+                    _this.router.navigate(['/user/user-list']).then();
                 });
             }
             else {
                 this.userService.register({ email: email, password: password, userCode: userCode, userName: userName, phoneNumber: phoneNumber }).then(function (result) {
                     console.log(result);
-                    _this.router.navigate(['/user/user-list']);
+                    _this.router.navigate(['/user/user-list']).then();
                 });
             }
         }
@@ -291,7 +642,7 @@ var UserListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nz-header class=\"header\">\r\n  <div class=\"logo\"><img width=\"50\" src=\"./../../../assets/iotWls.svg\" alt=\"\"/>web音乐管理系统</div>\r\n  <div class=\"alarm\">\r\n  </div>\r\n</nz-header>\r\n<nz-layout class=\"layout\">\r\n\r\n  <nz-layout>\r\n    <nz-sider [nzWidth]=\"200\" style=\"background:#263238;\">\r\n      <ul nz-menu [nzMode]=\"'inline'\" style=\"background:#263238;width:201px;color: #939fa7;\">\r\n        <li nz-menu-item nz-tooltip nzPlacement=\"right\" (click)=\"navigate('user/music/music-list')\">\r\n            <span title>\r\n            <i class=\"anticon anticon-mail\"></i>\r\n            <span>音乐列表</span>\r\n            </span>\r\n        </li>\r\n        <li nz-menu-item (click)=\"navigate('user/user-list')\">\r\n            <span title>\r\n              <i class=\"anticon anticon-appstore\"></i>\r\n              <span>用户列表</span>\r\n            </span>\r\n        </li>\r\n        <li nz-menu-item>\r\n            <span title>\r\n              <i class=\"anticon anticon-setting\"></i>\r\n              <span>播放策略配置</span>\r\n            </span>\r\n        </li>\r\n      </ul>\r\n    </nz-sider>\r\n    <nz-layout style=\"padding:0 24px;box-sizing: border-box;background: #f6fafb\">\r\n      <nz-content style=\"background:#f6fafb; box-sizing: border-box;\r\n  height:calc(100vh - 133px);padding: 24px 24px 0 24px;overflow: auto \">\r\n        <router-outlet></router-outlet>\r\n      </nz-content>\r\n      <nz-footer style=\"text-align: center;background: #f6fafb\">Ant Design ©2017 Implement By Angular</nz-footer>\r\n    </nz-layout>\r\n  </nz-layout>\r\n</nz-layout>\r\n\r\n"
+module.exports = "<nz-header class=\"header\">\n  <div class=\"logo\"><img width=\"50\" src=\"./../../../assets/iotWls.svg\" alt=\"\"/>web音乐管理系统</div>\n  <div class=\"alarm\">\n  </div>\n</nz-header>\n<nz-layout class=\"layout\">\n\n  <nz-layout>\n    <nz-sider [nzWidth]=\"200\" style=\"background:#263238;\">\n      <ul nz-menu [nzMode]=\"'inline'\" style=\"background:#263238;width:201px;color: #939fa7;\">\n        <li nz-menu-item nz-tooltip nzPlacement=\"right\" (click)=\"navigate('user/music/music-list')\">\n            <span title>\n            <i class=\"anticon anticon-mail\"></i>\n            <span>音乐列表</span>\n            </span>\n        </li>\n        <li nz-menu-item (click)=\"navigate('user/user-list')\">\n            <span title>\n              <i class=\"anticon anticon-appstore\"></i>\n              <span>用户列表</span>\n            </span>\n        </li>\n        <li nz-menu-item>\n            <span title>\n              <i class=\"anticon anticon-setting\"></i>\n              <span>播放策略配置</span>\n            </span>\n        </li>\n      </ul>\n    </nz-sider>\n    <nz-layout style=\"padding:0 24px;box-sizing: border-box;background: #f6fafb\">\n      <nz-content style=\"background:#f6fafb; box-sizing: border-box;\n  height:calc(100vh - 133px);padding: 24px 24px 0 24px;overflow: auto \">\n        <router-outlet></router-outlet>\n      </nz-content>\n      <nz-footer style=\"text-align: center;background: #f6fafb\">Ant Design ©2017 Implement By Angular</nz-footer>\n    </nz-layout>\n  </nz-layout>\n</nz-layout>\n<app-play></app-play>\n"
 
 /***/ }),
 
@@ -373,6 +724,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-user/add-user.component */ "./src/app/component/user/add-user/add-user.component.ts");
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/shared.module */ "./src/app/shared/shared.module.ts");
 /* harmony import */ var _user_list_user_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./user-list/user-list.component */ "./src/app/component/user/user-list/user-list.component.ts");
+/* harmony import */ var _play_play_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../play/play.component */ "./src/app/component/play/play.component.ts");
+/* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/core.module */ "./src/app/core/core.module.ts");
+/* harmony import */ var _play_play_progress_play_progress_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../play/play-progress/play-progress.component */ "./src/app/component/play/play-progress/play-progress.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -389,6 +743,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
 var UserModule = /** @class */ (function () {
     function UserModule() {
     }
@@ -396,11 +753,12 @@ var UserModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
                 _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__["SharedModule"],
+                _core_core_module__WEBPACK_IMPORTED_MODULE_8__["CoreModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(_user_routes__WEBPACK_IMPORTED_MODULE_2__["ROUTER_CONFIG"]),
             ],
             exports: [],
-            declarations: [_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_4__["AddUserComponent"], _user_list_user_list_component__WEBPACK_IMPORTED_MODULE_6__["UserListComponent"]],
-            entryComponents: []
+            declarations: [_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_4__["AddUserComponent"], _user_list_user_list_component__WEBPACK_IMPORTED_MODULE_6__["UserListComponent"], _play_play_progress_play_progress_component__WEBPACK_IMPORTED_MODULE_9__["PlayProgressComponent"], _play_play_component__WEBPACK_IMPORTED_MODULE_7__["PlayComponent"]],
+            entryComponents: [_play_play_progress_play_progress_component__WEBPACK_IMPORTED_MODULE_9__["PlayProgressComponent"]]
         })
     ], UserModule);
     return UserModule;
@@ -436,6 +794,129 @@ var ROUTER_CONFIG = [
         ]
     },
 ];
+
+
+/***/ }),
+
+/***/ "./src/app/core/entity/music.ts":
+/*!**************************************!*\
+  !*** ./src/app/core/entity/music.ts ***!
+  \**************************************/
+/*! exports provided: Music */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Music", function() { return Music; });
+/**
+ * Created by wh1709040 on 2018/10/23.
+ */
+var Music = /** @class */ (function () {
+    function Music() {
+    }
+    Object.defineProperty(Music.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "songName", {
+        get: function () {
+            return this._songName;
+        },
+        set: function (value) {
+            this._songName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "songUrl", {
+        get: function () {
+            return this._songUrl;
+        },
+        set: function (value) {
+            this._songUrl = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "singer", {
+        get: function () {
+            return this._singer;
+        },
+        set: function (value) {
+            this._singer = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "createTime", {
+        get: function () {
+            return this._createTime;
+        },
+        set: function (value) {
+            this._createTime = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "songPic", {
+        get: function () {
+            return this._songPic;
+        },
+        set: function (value) {
+            this._songPic = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "songType", {
+        get: function () {
+            return this._songType;
+        },
+        set: function (value) {
+            this._songType = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "cdId", {
+        get: function () {
+            return this._cdId;
+        },
+        set: function (value) {
+            this._cdId = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "file", {
+        get: function () {
+            return this._file;
+        },
+        set: function (value) {
+            this._file = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Music.prototype, "description", {
+        get: function () {
+            return this._description;
+        },
+        set: function (value) {
+            this._description = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Music;
+}());
+
 
 
 /***/ })

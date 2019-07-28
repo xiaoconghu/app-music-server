@@ -50,7 +50,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".header {\r\n  margin: 0;\r\n  background: url('wls.png');\r\n}\r\n"
+module.exports = ".header {\n  margin: 0;\n  background: url('wls.png');\n}\n"
 
 /***/ }),
 
@@ -61,7 +61,7 @@ module.exports = ".header {\r\n  margin: 0;\r\n  background: url('wls.png');\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- NG-ZORRO -->\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<!-- NG-ZORRO -->\n\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -82,17 +82,25 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
+// import {NzI18nService, zh_TW} from 'ng-zorro-antd';
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'WLS';
     }
+    AppComponent.prototype.ngOnInit = function () {
+        // this.i18n.setLocale(zh_TW);
+    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [])
     ], AppComponent);
     return AppComponent;
 }());
@@ -117,22 +125,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/esm5/antd.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/locales/zh */ "./node_modules/@angular/common/locales/zh.js");
 /* harmony import */ var _angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_zh__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _app_routes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.routes */ "./src/app/app.routes.ts");
 /* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/core.module */ "./src/app/core/core.module.ts");
-/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./shared/shared.module */ "./src/app/shared/shared.module.ts");
-/* harmony import */ var _noop_interceptor__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./noop-interceptor */ "./src/app/noop-interceptor.ts");
-/* harmony import */ var ngx_echarts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-echarts */ "./node_modules/ngx-echarts/fesm5/ngx-echarts.js");
+/* harmony import */ var _noop_interceptor__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./noop-interceptor */ "./src/app/noop-interceptor.ts");
+/* harmony import */ var ngx_echarts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-echarts */ "./node_modules/ngx-echarts/fesm5/ngx-echarts.js");
+/* harmony import */ var _core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./core/mission/music-mission.service */ "./src/app/core/mission/music-mission.service.ts");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./shared/shared.module */ "./src/app/shared/shared.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -164,8 +174,8 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"],
                 ng_zorro_antd__WEBPACK_IMPORTED_MODULE_6__["NgZorroAntdModule"],
                 _core_core_module__WEBPACK_IMPORTED_MODULE_11__["CoreModule"],
-                _shared_shared_module__WEBPACK_IMPORTED_MODULE_12__["SharedModule"],
-                ngx_echarts__WEBPACK_IMPORTED_MODULE_14__["NgxEchartsModule"],
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_15__["SharedModule"],
+                ngx_echarts__WEBPACK_IMPORTED_MODULE_13__["NgxEchartsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_9__["RouterModule"].forRoot(_app_routes__WEBPACK_IMPORTED_MODULE_10__["ROUTER_CONFIG"])
             ],
             providers: [
@@ -174,7 +184,8 @@ var AppModule = /** @class */ (function () {
                     provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["LocationStrategy"],
                     useClass: _angular_common__WEBPACK_IMPORTED_MODULE_7__["HashLocationStrategy"],
                 },
-                { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HTTP_INTERCEPTORS"], useClass: _noop_interceptor__WEBPACK_IMPORTED_MODULE_13__["NoopInterceptor"], multi: true }
+                { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HTTP_INTERCEPTORS"], useClass: _noop_interceptor__WEBPACK_IMPORTED_MODULE_12__["NoopInterceptor"], multi: true },
+                _core_mission_music_mission_service__WEBPACK_IMPORTED_MODULE_14__["MusicMissionService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -529,6 +540,101 @@ var Operation = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/core/mission/music-mission.service.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/core/mission/music-mission.service.ts ***!
+  \*******************************************************/
+/*! exports provided: MusicMissionService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MusicMissionService", function() { return MusicMissionService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by WH1709040 on 2018/11/8.
+ */
+
+
+var MusicMissionService = /** @class */ (function () {
+    function MusicMissionService() {
+        this.music = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        /**
+         * 用于接收音乐
+         */
+        this.musicChange = this.music.asObservable();
+    }
+    /**
+     * 提交音乐
+     * param e<any>
+     */
+    MusicMissionService.prototype.commitMusic = function (e) {
+        this.music.next(e);
+    };
+    MusicMissionService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [])
+    ], MusicMissionService);
+    return MusicMissionService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/utils/commonUtils.ts":
+/*!*******************************************!*\
+  !*** ./src/app/core/utils/commonUtils.ts ***!
+  \*******************************************/
+/*! exports provided: CommonUtils */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommonUtils", function() { return CommonUtils; });
+/**
+ * Created by wh1709040 on 2018/9/19.
+ */
+var CommonUtils = /** @class */ (function () {
+    function CommonUtils() {
+    }
+    CommonUtils.dateFmt = function (fmt, date) {
+        var o = {
+            'M+': date.getMonth() + 1,
+            'd+': date.getDate(),
+            'h+': date.getHours(),
+            'm+': date.getMinutes(),
+            's+': date.getSeconds(),
+            'q+': Math.floor((date.getMonth() + 3) / 3),
+            'S': date.getMilliseconds() // 毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp('(' + k + ')').test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+            }
+        }
+        return fmt;
+    };
+    return CommonUtils;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/core/utils/websocket-impl.service.ts":
 /*!******************************************************!*\
   !*** ./src/app/core/utils/websocket-impl.service.ts ***!
@@ -654,8 +760,8 @@ var WebSocketFactory = /** @class */ (function () {
     }
     /**
      * injector single instance
-     * @param {Provider} type
-     * @returns {SocketIO}
+     * param {Provider} type
+     * returns {SocketIO}
      */
     WebSocketFactory.forRoot = function (type) {
         if (!WebSocketFactory.instance) {
@@ -823,7 +929,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var NwFormComponent = /** @class */ (function () {
     function NwFormComponent() {
         this.formGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({});
-        this.isDisabled = false;
         this.formInstance = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     NwFormComponent.prototype.ngOnInit = function () {
@@ -863,7 +968,7 @@ var NwFormComponent = /** @class */ (function () {
     ], NwFormComponent.prototype, "formInstance", void 0);
     NwFormComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'nw-form',
+            selector: 'app-nw-form',
             template: __webpack_require__(/*! ./nw-form.component.html */ "./src/app/shared/nw-form/nw-form.component.html"),
             styles: [__webpack_require__(/*! ./nw-form.component.less */ "./src/app/shared/nw-form/nw-form.component.less")]
         }),
@@ -1039,6 +1144,51 @@ var FormOperate = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/pipe/time.pipe.ts":
+/*!******************************************!*\
+  !*** ./src/app/shared/pipe/time.pipe.ts ***!
+  \******************************************/
+/*! exports provided: TimePipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimePipe", function() { return TimePipe; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _core_utils_commonUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/utils/commonUtils */ "./src/app/core/utils/commonUtils.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+/**
+ * Created by WH1709040 on 2018/11/9.
+ */
+
+
+var TimePipe = /** @class */ (function () {
+    function TimePipe() {
+    }
+    TimePipe.prototype.transform = function (value) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        return _core_utils_commonUtils__WEBPACK_IMPORTED_MODULE_1__["CommonUtils"].dateFmt('mm:ss', new Date(value));
+    };
+    TimePipe = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
+            name: 'timePipe'
+        })
+    ], TimePipe);
+    return TimePipe;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/shared.module.ts":
 /*!*****************************************!*\
   !*** ./src/app/shared/shared.module.ts ***!
@@ -1052,9 +1202,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _table_table_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./table/table.component */ "./src/app/shared/table/table.component.ts");
-/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/esm5/antd.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm5/ng-zorro-antd.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _nw_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./nw-form */ "./src/app/shared/nw-form/index.ts");
+/* harmony import */ var _pipe_time_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pipe/time.pipe */ "./src/app/shared/pipe/time.pipe.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1064,6 +1215,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 /**
  * Created by wh1709040 on 2018/9/15.
  */
+
 
 
 
@@ -1081,10 +1233,11 @@ var SharedModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"]
             ],
-            declarations: [_table_table_component__WEBPACK_IMPORTED_MODULE_2__["TableComponent"], _nw_form__WEBPACK_IMPORTED_MODULE_5__["NwFormComponent"]],
+            declarations: [_table_table_component__WEBPACK_IMPORTED_MODULE_2__["TableComponent"], _nw_form__WEBPACK_IMPORTED_MODULE_5__["NwFormComponent"], _pipe_time_pipe__WEBPACK_IMPORTED_MODULE_6__["TimePipe"]],
             exports: [
                 _table_table_component__WEBPACK_IMPORTED_MODULE_2__["TableComponent"],
                 _nw_form__WEBPACK_IMPORTED_MODULE_5__["NwFormComponent"],
+                _pipe_time_pipe__WEBPACK_IMPORTED_MODULE_6__["TimePipe"],
                 ng_zorro_antd__WEBPACK_IMPORTED_MODULE_3__["NgZorroAntdModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
@@ -1298,7 +1451,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! G:\work-file\web-music-ng\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/aaa/WebstormProjects/web-music-ng/src/main.ts */"./src/main.ts");
 
 
 /***/ })

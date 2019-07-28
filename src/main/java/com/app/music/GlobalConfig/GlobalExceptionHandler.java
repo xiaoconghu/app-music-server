@@ -23,11 +23,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public Result allExceptionHandler(HttpServletRequest request, Exception exception) throws Exception {
         exception.printStackTrace();
-        System.out.println("我报错了：" + exception.getLocalizedMessage());
-        System.out.println("我报错了：" + exception.getCause());
-        System.out.println("我报错了：" + exception.getSuppressed());
-        System.out.println("我报错了：" + exception.getMessage());
-        System.out.println("我报错了：" + exception.getStackTrace());
         return CommonUtils.failed(ResultCode.NETWORK_ERROR);
     }
 }

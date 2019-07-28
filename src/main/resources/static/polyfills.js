@@ -5473,7 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! G:\work-file\web-music-ng\src\polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /Users/aaa/WebstormProjects/web-music-ng/src/polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })
