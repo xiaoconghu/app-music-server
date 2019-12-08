@@ -23,9 +23,9 @@ public class CdController {
     /**
      * 新增歌单
      *
-     * @param params
-     * @return
-     * @throws IOException
+     * @param params params
+     * @return String
+     * @throws IOException io流异常
      */
     @PostMapping("/insert")
     public String insert(@RequestBody String params) throws IOException {
