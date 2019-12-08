@@ -75,6 +75,12 @@ public class SongController {
         return songService.query();
     }
 
+    /**
+     * 播放歌曲
+     * @param songId 歌曲id
+     * @param request request
+     * @param response response
+     */
     @RequestMapping(value="/media/{songId}", method=RequestMethod.GET)
     public void getDownload(@PathVariable int songId, HttpServletRequest request, HttpServletResponse response) {
         try {
