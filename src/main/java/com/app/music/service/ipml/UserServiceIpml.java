@@ -56,7 +56,13 @@ public class UserServiceIpml implements IUserService {
 
     @Override
     public Result logout(Map map, HttpServletRequest request) {
-        return null;
+
+        if ("admin".equals(map.get("userCode"))) {
+            System.out.println(map);
+        } else {
+            System.out.println("当前退出的用户为" + map.get("userCode"));
+        }
+        return CommonUtils.success(ResultCode.SUCCESS, null);
     }
 
     @Override
