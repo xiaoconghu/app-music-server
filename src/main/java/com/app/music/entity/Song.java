@@ -2,7 +2,9 @@ package com.app.music.entity;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable {
     /**
      * id
      */

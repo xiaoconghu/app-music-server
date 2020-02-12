@@ -4,6 +4,7 @@ import com.app.music.dao.ISongDao;
 import com.app.music.entity.Song;
 import com.app.music.service.ISongService;
 import com.app.music.utils.CommonUtils;
+import com.app.music.utils.Const;
 import com.app.music.utils.Result;
 import com.app.music.utils.ResultCode;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -28,7 +29,7 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result insert(Song song) throws IOException {
-        String filePath = "D:/music";
+        String filePath = Const.url;
         String originalFilename = song.getFile().getOriginalFilename();
         String regex = "\\.";
         String[] split = originalFilename.split(regex);
