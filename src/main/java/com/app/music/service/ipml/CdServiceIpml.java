@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -64,7 +65,7 @@ public class CdServiceIpml implements ICdService {
 
     @Override
     public Result query() {
-        List<Cd> query = cdDao.query();
+        List query = cdDao.query();
         return CommonUtils.success(ResultCode.SUCCESS,query);
     }
 

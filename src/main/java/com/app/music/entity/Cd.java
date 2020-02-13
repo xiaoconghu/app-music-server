@@ -8,6 +8,14 @@ public class Cd implements Serializable {
      */
     private int cdId;
     /**
+     * 歌手id
+     */
+    private int singerId;
+    /**
+     * 歌手名称
+     */
+    private String singerName;
+    /**
      * 歌单名称
      */
     private String cdName;
@@ -78,5 +86,13 @@ public class Cd implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getSingerId() {
+        return singerId;
+    }
+
+    public void setSingerId(int singerId) {
+        this.singerId = singerId;
     }
 }

@@ -3,9 +3,9 @@
 <mapper namespace="com.app.music.dao.ICdDao">
 
     <insert id="insert">
-        INSERT INTO cd (cd_name,create_user,create_time,cd_pic,description)
+        INSERT INTO cd (cd_name,singer_id,create_user,create_time,cd_pic,description)
         VALUES
-        (#{cdName},#{createUser},#{createTime},#{cdPic},#{description})
+        (#{cdName},#{singerId},#{createUser},#{createTime},#{cdPic},#{description})
     </insert>
 
     <delete id="delete">
@@ -17,24 +17,38 @@
         <set>
             cd_name=#{cdName},
             cd_pic=#{cdPic},
+            singer_id=#{singerId},
             create_user=#{createUser},
             create_time=#{createTime},
             description=#{description},
         </set>
         WHERE id=#{cdId}
     </update>
-    <select id="query" resultMap="cdMap">
-        SELECT * FROM cd
+    <select id="query" resultMap="cdInfoMap">
+        SELECT
+        c.*,s.singer_name
+        FROM
+        cd c
+        LEFT JOIN singer s ON s.id = c.singer_id
     </select>
     <select id="queryById" resultMap="cdMap">
-        SELECT * FROM cd WHERE id=#{cdId}
+        SELECT * FROM cd WHERE id = #{id}
     </select>
-    <resultMap id="cdMap" type="Cd">
+    <resultMap id="cdInfoMap" type="Map">
         <result column="id" property="cdId"/>
         <result column="cd_name" property="cdName"/>
+        <result column="singer_id" property="singerId"/>
+        <result column="singer_name" property="singerName"/>
         <result column="create_user" property="createUser"/>
         <result column="create_time" property="createTime"/>
         <result column="description" property="description"/>
     </resultMap>
-
+    <resultMap id="cdMap" type="Cd">
+        <result column="id" property="cdId"/>
+        <result column="cd_name" property="cdName"/>
+        <result column="singer_id" property="singerId"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="description" property="description"/>
+    </resultMap>
 </mapper>

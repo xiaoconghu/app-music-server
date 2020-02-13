@@ -28,9 +28,7 @@ public class CdController {
      * @throws IOException io流异常
      */
     @PostMapping("/insert")
-    public String insert(@RequestBody String params) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Cd cd = mapper.readValue(params, Cd.class);
+    public String insert(@RequestBody Cd cd) throws IOException {
         Result result = cdService.insert(cd);
         return CommonUtils.classToJson(result);
     }
@@ -42,7 +40,7 @@ public class CdController {
      * @return
      * @throws JsonProcessingException
      */
-    @GetMapping("/delete/{cdId}")
+    @DeleteMapping("/delete/{cdId}")
     public String delete(@PathVariable int cdId) throws JsonProcessingException {
         Result delete = cdService.delete(cdId);
         logger.info(delete.getMsg());
@@ -69,7 +67,6 @@ public class CdController {
      */
     @GetMapping("/query")
     public Result query(){
-
         return cdService.query();
     }
 
