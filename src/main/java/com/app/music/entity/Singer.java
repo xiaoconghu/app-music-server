@@ -32,6 +32,14 @@ public class Singer implements Serializable {
      */
     private String description;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getSingerName() {
         return singerName;
     }
