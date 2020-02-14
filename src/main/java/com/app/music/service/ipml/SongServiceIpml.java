@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 @Service
@@ -75,7 +76,7 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result query() {
-        List<Song> query = songDao.query();
+        List query = songDao.query();
         return CommonUtils.success(ResultCode.SUCCESS, query);
     }
 

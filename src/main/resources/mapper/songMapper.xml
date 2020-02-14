@@ -43,8 +43,13 @@
         </set>
         WHERE id = #{id}
     </update>
-    <select id="query" resultMap="songMap">
-        SELECT * FROM song
+    <select id="query" resultMap="songAllMap">
+        SELECT
+        s.*,c.cd_name,c.singer_id,si.singer_name
+
+        FROM
+        song s
+        LEFT JOIN cd	c ON s.cd_id = c.id LEFT JOIN singer si ON si.id = c.singer_id;
     </select>
     <select id="queryById" resultMap="songMap">
         SELECT * FROM song WHERE id = #{songId}
@@ -55,6 +60,20 @@
         <result column="song_name" property="songName"/>
         <result column="song_url" property="songUrl"/>
         <result column="singer" property="singer"/>
+        <result column="create_time" property="createTime"/>
+        <result column="song_pic" property="songPic"/>
+        <result column="song_type" property="songType"/>
+        <result column="description" property="description"/>
+    </resultMap>
+    <resultMap id="songAllMap" type="Map">
+        <result column="id" property="id"/>
+        <result column="cd_id" property="cdId"/>
+        <result column="singer_id" property="singerId"/>
+        <result column="song_name" property="songName"/>
+        <result column="cd_name" property="cdName"/>
+        <result column="song_url" property="songUrl"/>
+        <result column="singer" property="singer"/>
+        <result column="singer_name" property="singerName"/>
         <result column="create_time" property="createTime"/>
         <result column="song_pic" property="songPic"/>
         <result column="song_type" property="songType"/>
