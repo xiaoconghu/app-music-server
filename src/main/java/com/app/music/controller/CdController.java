@@ -49,6 +49,7 @@ public class CdController {
 
     /**
      * 修改歌单
+     *
      * @param params
      * @return
      * @throws IOException
@@ -63,21 +64,29 @@ public class CdController {
 
     /**
      * 查询歌单
+     *
      * @return
      */
     @GetMapping("/query")
-    public Result query(){
+    public Result query() {
         return cdService.query();
     }
 
     /**
      * 通过id查询歌单
+     *
      * @param cdId
      * @return
      */
     @GetMapping("/queryById/{cdId}")
-    public Result queryById(@PathVariable int cdId){
+    public Result queryById(@PathVariable int cdId) {
         Result result = cdService.queryById(cdId);
         return result;
     }
+
+    @PostMapping("/deleteByBatch")
+    public Result deleteByBatch(@RequestBody String[] arr) {
+        return cdService.deleteByBatch(arr);
+    }
+
 }

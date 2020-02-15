@@ -73,4 +73,10 @@ public class CdServiceIpml implements ICdService {
     public Result queryById(int id) {
         return CommonUtils.success(ResultCode.SUCCESS,cdDao.queryById(id));
     }
+
+    @Override
+    public Result deleteByBatch(String[] arr) {
+        cdDao.deleteByBatch(arr);
+        return CommonUtils.success(ResultCode.SUCCESS, null);
+    }
 }
