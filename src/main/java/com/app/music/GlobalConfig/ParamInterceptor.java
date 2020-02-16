@@ -20,6 +20,7 @@ public class ParamInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String token = CookieUtils.getCookieValue("token");
         if (StringUtils.isEmpty(token)) {
+            System.out.println("token验证失败");
             httpServletResponse.sendError(401, "token验证失败");
             return false;
         }

@@ -44,9 +44,7 @@ public class UserServiceIpml implements IUserService {
             list.add(user);
             String token = UUID.randomUUID().toString().replaceAll("-", "");
             CookieUtils.setCookie("token", token);
-            loadingCache.put(token,user.getId());
-            int aa = (int) loadingCache.get(token);
-            System.out.println(aa);
+            loadingCache.put(token,user);
             return CommonUtils.success(ResultCode.SUCCESS, list);
         }
 

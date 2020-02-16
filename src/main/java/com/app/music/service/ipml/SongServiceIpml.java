@@ -2,31 +2,30 @@ package com.app.music.service.ipml;
 
 import com.app.music.dao.ISongDao;
 import com.app.music.entity.Song;
+import com.app.music.entity.User;
 import com.app.music.service.ISongService;
-import com.app.music.utils.CommonUtils;
-import com.app.music.utils.Const;
-import com.app.music.utils.Result;
-import com.app.music.utils.ResultCode;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import com.app.music.utils.*;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
 
 @Service
 public class SongServiceIpml implements ISongService {
     @Autowired
     private ISongDao songDao;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    LoadingCache loadingCache;
+    @Autowired
+    TokenUtil tokenUtil;
 
     @Override
     public Result insert(Song song) throws IOException {
@@ -55,6 +54,11 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result delete(int id) {
+        User user = tokenUtil.getUser();
+        // 如果当前用户不是admin不能删除
+        if (!"admin".equals(user.getUserCode())) {
+            return CommonUtils.failed(ResultCode.PERMISSIONS_ERROR);
+        }
         Song song = songDao.queryById(id);
         String s = CommonUtils.deleteFile(song.getSongUrl());
         logger.info(s);
@@ -88,6 +92,11 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result deleteByBatch(String[] arr) {
+        User user = tokenUtil.getUser();
+        // 如果当前用户不是admin不能删除
+        if (!"admin".equals(user.getUserCode())) {
+            return CommonUtils.failed(ResultCode.PERMISSIONS_ERROR);
+        }
         songDao.deleteByBatch(arr);
         return CommonUtils.success(ResultCode.SUCCESS, null);
     }
