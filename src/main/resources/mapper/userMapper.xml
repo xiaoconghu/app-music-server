@@ -12,7 +12,7 @@
         SELECT * FROM user WHERE id = #{userId}
     </select>
     <select id="queryAllUser" resultMap="userMap">
-        SELECT id,user_code,user_name,phone_number,email,create_time FROM `user`WHERE user_name!='admin';
+        SELECT id,user_code,user_name,phone_number,email,create_time FROM `user`WHERE user_code!='admin';
     </select>
     <delete id="deleteUserByUserId">
         DELETE FROM user WHERE id = #{userId}

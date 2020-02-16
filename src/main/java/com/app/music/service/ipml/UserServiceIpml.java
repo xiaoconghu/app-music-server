@@ -1,18 +1,18 @@
 package com.app.music.service.ipml;
 
+import com.app.music.config.CookieUtils;
 import com.app.music.dao.IUserDao;
 import com.app.music.entity.User;
 import com.app.music.service.IUserService;
-import com.app.music.utils.CommonUtils;
-import com.app.music.utils.Md5;
-import com.app.music.utils.Result;
-import com.app.music.utils.ResultCode;
+import com.app.music.utils.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,10 +21,8 @@ import java.util.*;
 public class UserServiceIpml implements IUserService {
     @Autowired
     private IUserDao IUserDao;
-    @Resource
-    private RedisTemplate redisTemplate;
-
-    @Override
+    @Autowired
+    private LoadingCache loadingCache;
 
     public Result login(Map map, HttpServletRequest request) throws JsonProcessingException {
         String ipAddr = CommonUtils.getIpAddr(request);
@@ -44,14 +42,20 @@ public class UserServiceIpml implements IUserService {
             stringStringMap.put("user", s);
             ArrayList<User> list = new ArrayList<>();
             list.add(user);
-//            User user1 = (User) redisTemplate.opsForValue().get("user");
-//            System.out.println(user1.toString());
-//            redisTemplate.opsForValue().set("user", user);
-//            Object user2 = redisTemplate.opsForValue().get("user");
-
+            String token = UUID.randomUUID().toString().replaceAll("-", "");
+            CookieUtils.setCookie("token", token);
+            loadingCache.put(token,user.getId());
+            int aa = (int) loadingCache.get(token);
+            System.out.println(aa);
             return CommonUtils.success(ResultCode.SUCCESS, list);
         }
 
+    }
+
+    @Cacheable(cacheNames = "emp")
+    public String getTokenObject(String token, String userId) {
+        System.out.println("查找key为：" + userId);
+        return userId;
     }
 
     @Override
