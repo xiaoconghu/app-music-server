@@ -33,7 +33,7 @@
 1. git clone 项目
 2. 安装 java maven mysql 等java开发需要的环境
 3. 修改mysql连接等项目配置。导入resources中sql脚本
-2. 通过idea 导入maven项目 安装依赖 通过mian方法启动
+2. 通过idea 导入maven项目 安装依赖 通过main方法启动
 3. java -jar 启动
 3. 浏览器打开http://localhost:8888
 
