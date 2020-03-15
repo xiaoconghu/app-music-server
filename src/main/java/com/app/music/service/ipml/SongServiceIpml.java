@@ -9,6 +9,7 @@ import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +27,12 @@ public class SongServiceIpml implements ISongService {
     LoadingCache loadingCache;
     @Autowired
     TokenUtil tokenUtil;
+    @Value("${music.filePath}")
+    String filePath;
 
     @Override
     public Result insert(Song song) throws IOException {
-        String filePath = Const.url;
+        System.out.println(filePath);
         String originalFilename = song.getFile().getOriginalFilename();
         String regex = "\\.";
         String[] split = originalFilename.split(regex);
