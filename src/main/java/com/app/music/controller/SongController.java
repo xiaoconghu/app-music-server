@@ -77,14 +77,15 @@ public class SongController {
 
     /**
      * 播放歌曲
-     * @param songId 歌曲id
-     * @param request request
+     *
+     * @param songId   歌曲id
+     * @param request  request
      * @param response response
      */
-    @RequestMapping(value="/media/{songId}", method=RequestMethod.GET)
+    @RequestMapping(value = "/media/{songId}", method = RequestMethod.GET)
     public void getDownload(@PathVariable int songId, HttpServletRequest request, HttpServletResponse response) {
         try {
-            songService.getDownload(songId,request,response);
+            songService.getDownloadLocal(songId,request,response);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {

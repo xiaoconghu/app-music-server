@@ -1,5 +1,6 @@
 package com.app.music.service.ipml;
 
+import com.app.music.config.OSSConfig;
 import com.app.music.dao.ISongDao;
 import com.app.music.entity.Song;
 import com.app.music.entity.User;
@@ -11,12 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SongServiceIpml implements ISongService {
@@ -29,23 +33,53 @@ public class SongServiceIpml implements ISongService {
     TokenUtil tokenUtil;
     @Value("${music.filePath}")
     String filePath;
+    @Autowired
+    private OSSConfig ossConfig;
 
+//    /**
+//     * 使用本地存储
+//     * @param song
+//     * @return
+//     * @throws IOException
+//     */
+//    @Override
+//    public Result insert(Song song) throws IOException {
+//        System.out.println(filePath);
+//        String originalFilename = song.getFile().getOriginalFilename();
+//        String regex = "\\.";
+//        String[] split = originalFilename.split(regex);
+//        String fileName = song.getSongName() + "." + split[1];
+//        try {
+//            CommonUtils.uploadFile(song.getFile().getBytes(), filePath, fileName);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        song.setSongUrl(filePath + "/" + fileName);
+//        Boolean aBoolean = songDao.insert(song);
+//        if (aBoolean) {
+//            return CommonUtils.success(ResultCode.SUCCESS, null);
+//        } else {
+//            return CommonUtils.failed(ResultCode.NETWORK_ERROR);
+//        }
+//
+//    }
+
+    /**
+     * 使用oss存储
+     *
+     * @param song
+     * @return
+     * @throws IOException
+     */
     @Override
     public Result insert(Song song) throws IOException {
-        System.out.println(filePath);
-        String originalFilename = song.getFile().getOriginalFilename();
-        String regex = "\\.";
-        String[] split = originalFilename.split(regex);
-        String fileName = song.getSongName() + "." + split[1];
-        try {
-            CommonUtils.uploadFile(song.getFile().getBytes(), filePath, fileName);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        song.setSongUrl(filePath + "/" + fileName);
-        /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String createTime = sdf.format(new Date());
-        song.setCreateTime(new Date());*/
+        // 高依赖版本 oss 上传工具
+
+        String ossFileUrlBoot = OSSBootUtil.upload(ossConfig, song.getFile(), "music/");
+
+        logger.info("上传的返回的地址："+ossFileUrlBoot);
+        song.setSongUrl(ossFileUrlBoot);
+        logger.info("上传的文件名："+song.getSongName());
         Boolean aBoolean = songDao.insert(song);
         if (aBoolean) {
             return CommonUtils.success(ResultCode.SUCCESS, null);
@@ -84,6 +118,12 @@ public class SongServiceIpml implements ISongService {
     @Override
     public Result query() {
         List query = songDao.query();
+        for (int i = 0; i < query.size(); i++) {
+            Map s = (Map) query.get(i);
+            String fullPath  = this.getDownload((String) s.get("songUrl"));
+            fullPath = fullPath.replace("http://app-music-web.oss-cn-hangzhou-internal.aliyuncs.com","http://118.178.18.207");
+            s.replace("songUrl",fullPath);
+        }
         return CommonUtils.success(ResultCode.SUCCESS, query);
     }
 
@@ -104,8 +144,23 @@ public class SongServiceIpml implements ISongService {
         return CommonUtils.success(ResultCode.SUCCESS, null);
     }
 
+    /**
+     * 获得歌曲路径
+     *
+     * @param fileUrl
+     * @return
+     */
+    public String getDownload(String fileUrl) {
+        if (!StringUtils.isEmpty(fileUrl)) {
+            String[] split = fileUrl.split("/");
+            String fullPath = OSSBootUtil.getUrl(ossConfig, "music/" + split[split.length - 1]);
+            return fullPath;
+        }
+        return null;
+    }
+
     @Override
-    public void getDownload(int songId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getDownloadLocal(int songId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Song song = songDao.queryById(songId);
         String fullPath = song.getSongUrl();
         File downloadFile = new File(fullPath);

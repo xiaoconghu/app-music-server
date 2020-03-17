@@ -66,6 +66,7 @@ public class CommonUtils {
         out.close();
     }
 
+
     public static String deleteFile(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {

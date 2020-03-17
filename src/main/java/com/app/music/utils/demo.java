@@ -55,3 +55,11 @@ class demo2 {
         System.out.println("Available　RAM：" + mem.getFreePhysicalMemorySize() / 1024 / 1024 / 1024 + "GB");
     }
 }
+class demo3{
+    public static void main(String[] args) {
+        String fullPath= "http://app-music-web.oss-cn-hangzhou-internal.aliyuncs.com/afafaffa";
+        String aa = fullPath.replace("http://app-music-web.oss-cn-hangzhou-internal.aliyuncs.com","http://118.178.18.207");
+        System.out.println(fullPath);
+        System.out.println(aa);
+    }
+}
