@@ -3,7 +3,8 @@
 <mapper namespace="com.app.music.dao.IUserDao">
 
     <insert id="insertUser" parameterType="User">
-      INSERT INTO user (user_code,user_name,password,phone_number,email,create_time) VALUES (#{userCode},#{userName},#{password},#{phoneNumber},#{email},#{createTime})
+        INSERT INTO user (user_code,user_name,password,phone_number,email,create_time) VALUES
+        (#{userCode},#{userName},#{password},#{phoneNumber},#{email},#{createTime})
     </insert>
     <select id="queryUserByUserCode" parameterType="String" resultMap="userMap">
         SELECT * FROM user WHERE user_code = #{userCode}
