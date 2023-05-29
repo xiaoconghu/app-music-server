@@ -1,10 +1,11 @@
 package com.app.music.service;
 
 import com.app.music.utils.Result;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.io.IOException;
 
-public interface ICommonService<T> {
+public interface ICommonService<T> extends IService<T> {
     /**
      * 新增
      *
@@ -33,7 +34,7 @@ public interface ICommonService<T> {
      *
      * @return
      */
-    Result query();
+    Result queryAll();
 
     /**
      * 查询单条

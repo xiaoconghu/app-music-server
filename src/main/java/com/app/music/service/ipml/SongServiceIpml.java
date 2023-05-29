@@ -2,10 +2,13 @@ package com.app.music.service.ipml;
 
 import com.app.music.config.OSSConfig;
 import com.app.music.dao.ISongDao;
+import com.app.music.entity.Cd;
 import com.app.music.entity.Song;
 import com.app.music.entity.User;
 import com.app.music.service.ISongService;
 import com.app.music.utils.*;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,15 +20,10 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
-public class SongServiceIpml implements ISongService {
-    @Autowired
-    private ISongDao songDao;
+public class SongServiceIpml extends ServiceImpl<ISongDao,Song> implements ISongService{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     LoadingCache loadingCache;
@@ -36,51 +34,26 @@ public class SongServiceIpml implements ISongService {
     @Autowired
     private OSSConfig ossConfig;
 
-//    /**
-//     * 使用本地存储
-//     * @param song
-//     * @return
-//     * @throws IOException
-//     */
-//    @Override
-//    public Result insert(Song song) throws IOException {
-//        System.out.println(filePath);
-//        String originalFilename = song.getFile().getOriginalFilename();
-//        String regex = "\\.";
-//        String[] split = originalFilename.split(regex);
-//        String fileName = song.getSongName() + "." + split[1];
-//        try {
-//            CommonUtils.uploadFile(song.getFile().getBytes(), filePath, fileName);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//        song.setSongUrl(filePath + "/" + fileName);
-//        Boolean aBoolean = songDao.insert(song);
-//        if (aBoolean) {
-//            return CommonUtils.success(ResultCode.SUCCESS, null);
-//        } else {
-//            return CommonUtils.failed(ResultCode.NETWORK_ERROR);
-//        }
-//
-//    }
-
     /**
-     * 使用oss存储
-     *
+     * 使用本地存储
      * @param song
      * @return
      * @throws IOException
      */
     @Override
     public Result insert(Song song) throws IOException {
-        // 高依赖版本 oss 上传工具
-
-        String ossFileUrlBoot = OSSBootUtil.upload(ossConfig, song.getFile(), "music/");
-
-        logger.info("上传的返回的地址："+ossFileUrlBoot);
-        song.setSongUrl(ossFileUrlBoot);
-        logger.info("上传的文件名："+song.getSongName());
-        Boolean aBoolean = songDao.insert(song);
+        System.out.println(filePath);
+        String originalFilename = song.getFile().getOriginalFilename();
+        String regex = "\\.";
+        String[] split = originalFilename.split(regex);
+        String fileName = song.getSongName() + "." + split[1];
+        try {
+            CommonUtils.uploadFile(song.getFile().getBytes(), filePath, fileName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        song.setSongUrl(filePath + "/" + fileName);
+        Boolean aBoolean = this.save(song);
         if (aBoolean) {
             return CommonUtils.success(ResultCode.SUCCESS, null);
         } else {
@@ -89,6 +62,32 @@ public class SongServiceIpml implements ISongService {
 
     }
 
+//    /**
+//     * 使用oss存储
+//     *
+//     * @param song
+//     * @return
+//     * @throws IOException
+//     */
+//    @Override
+//    public Result insert(Song song) throws IOException {
+//        // 高依赖版本 oss 上传工具
+//
+//        String ossFileUrlBoot = OSSBootUtil.upload(ossConfig, song.getFile(), "music/");
+//
+//        logger.info("上传的返回的地址："+ossFileUrlBoot);
+//        song.setSongUrl(ossFileUrlBoot);
+//        logger.info("上传的文件名："+song.getSongName());
+//        boolean aBoolean = this.save(song);
+////        Boolean aBoolean = songDao.insert(song);
+//        if (aBoolean) {
+//            return CommonUtils.success(ResultCode.SUCCESS, null);
+//        } else {
+//            return CommonUtils.failed(ResultCode.NETWORK_ERROR);
+//        }
+//
+//    }
+
     @Override
     public Result delete(int id) {
         User user = tokenUtil.getUser();
@@ -96,10 +95,12 @@ public class SongServiceIpml implements ISongService {
         if (!"admin".equals(user.getUserCode())) {
             return CommonUtils.failed(ResultCode.PERMISSIONS_ERROR);
         }
-        Song song = songDao.queryById(id);
+//        Song song = songDao.queryById(id);
+        Song song = this.getById(id);
         String s = CommonUtils.deleteFile(song.getSongUrl());
         logger.info(s);
-        Boolean delete = songDao.delete(id);
+        boolean delete = this.removeById(id);
+//        Boolean delete = songDao.delete(id);
 
         return delete ? CommonUtils.success(ResultCode.SUCCESS, null)
                 : CommonUtils.failed(ResultCode.NETWORK_ERROR);
@@ -107,17 +108,18 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result update(Song song) {
-        Song _song = songDao.queryById(song.getId());
+
+        Song _song = this.getById(song.getId());
         if (_song != null) {
-            Boolean update = songDao.update(song);
+            Boolean update = this.save(song);
             return update ? CommonUtils.success(ResultCode.SUCCESS, null)
                     : CommonUtils.failed(ResultCode.NETWORK_ERROR);
         } else return CommonUtils.failed(ResultCode.SONG_ERROR);
     }
 
     @Override
-    public Result query() {
-        List query = songDao.query();
+    public Result queryAll() {
+        List query = this.baseMapper.queryAll();
         for (int i = 0; i < query.size(); i++) {
             Map s = (Map) query.get(i);
             String fullPath  = this.getDownload((String) s.get("songUrl"));
@@ -129,7 +131,7 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public Result queryById(int id) {
-        Song song = songDao.queryById(id);
+        Song song = this.getById(id);
         return CommonUtils.success(ResultCode.SUCCESS, song);
     }
 
@@ -140,7 +142,7 @@ public class SongServiceIpml implements ISongService {
         if (!"admin".equals(user.getUserCode())) {
             return CommonUtils.failed(ResultCode.PERMISSIONS_ERROR);
         }
-        songDao.deleteByBatch(arr);
+        this.removeByIds(Arrays.asList(arr));
         return CommonUtils.success(ResultCode.SUCCESS, null);
     }
 
@@ -161,7 +163,7 @@ public class SongServiceIpml implements ISongService {
 
     @Override
     public void getDownloadLocal(int songId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Song song = songDao.queryById(songId);
+        Song song = this.getById(songId);
         String fullPath = song.getSongUrl();
         File downloadFile = new File(fullPath);
         String extName = "";

@@ -1,24 +1,34 @@
 package com.app.music.entity;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
+import java.io.Serializable;
+@Data()
+@TableName("user")
 public class User implements Serializable {
     /**
      * 用户id
      */
+    @TableId
     private int id;
 
     /**
      * 用户登录代码
      */
+    @TableField("user_code")
     private String userCode;
     /**
      * 用户昵称
      */
+    @TableField("user_name")
     private String userName;
     /**
      * 创建时间
      */
+    @TableField("create_time")
     private String createTime;
     /**
      * 用户邮箱
@@ -27,65 +37,11 @@ public class User implements Serializable {
     /**
      * 用户手机号码
      */
+    @TableField("phone_number")
     private String phoneNumber;
     /**
      * 用户密码
      */
     private String password;
 
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

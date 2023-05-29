@@ -1,16 +1,10 @@
 package com.app.music.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import java.util.List;
 
-public interface ICommonDao<T> {
-    /**
-     * 新增
-     *
-     * @param t
-     * @return
-     */
-    Boolean insert(T t);
-
+public interface ICommonDao<T> extends BaseMapper<T> {
     /**
      * 删除
      *
@@ -32,7 +26,7 @@ public interface ICommonDao<T> {
      *
      * @return
      */
-    List<T> query();
+    List<T> queryAll();
 
     /**
      * 查询单条

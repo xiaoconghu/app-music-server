@@ -2,69 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.app.music.dao.ISongDao">
 
-    <insert id="insert" parameterType="Song">
-        INSERT INTO song (cd_id,song_name,song_url,singer,song_pic,song_type,description)
-         VALUES
-        (#{cdId},#{songName},#{songUrl},#{singer},#{songPic},#{songType},#{description})
-    </insert>
 
     <delete id="deleteSongsByCd">
         delete from song where id in (
         SELECT * from (select s.id from cd c left join song s on s.cd_id = c.id WHERE c.id = #{id}) a
         )
     </delete>
-    <delete id="delete">
-        DELETE  FROM song WHERE id = #{id}
-    </delete>
-    <update id="update" parameterType="Song">
-        UPDATE song
-        <set>
-            <if test="songName!=null">
-                song_name = #{songName},
-            </if>
-            <if test="songUrl!=null">
-                song_url = #{songUrl},
-            </if>
-            <if test="singer!=null">
-                singer = #{singer},
-            </if>
-            <if test="createTime!=null">
-                create_time = #{createTime},
-            </if>
-            <if test="songPic!=null">
-                song_pic = #{songPic},
-            </if>
-            <if test="songType!=null">
-                song_type = #{songType},
-            </if>
-            <if test="description!=null">
-                description = #{description},
-            </if>
-        </set>
-        WHERE id = #{id}
-    </update>
-    <select id="query" resultMap="songAllMap">
+
+    <select id="queryAll" resultMap="songAllMap">
         SELECT
         s.*,c.cd_name,c.singer_id,si.singer_name
-
         FROM
         song s
-        LEFT JOIN cd	c ON s.cd_id = c.id LEFT JOIN singer si ON si.id = c.singer_id;
+        LEFT JOIN cd c ON s.cd_id = c.id LEFT JOIN singer si ON si.id = c.singer_id;
     </select>
-    <select id="queryById" resultMap="songMap">
-        SELECT * FROM song WHERE id = #{songId}
-    </select>
-    <resultMap id="songMap" type="Song">
-        <result column="id" property="id"/>
-        <result column="cd_id" property="cdId"/>
-        <result column="song_name" property="songName"/>
-        <result column="song_url" property="songUrl"/>
-        <result column="singer" property="singer"/>
-        <result column="create_time" property="createTime"/>
-        <result column="song_pic" property="songPic"/>
-        <result column="song_type" property="songType"/>
-        <result column="description" property="description"/>
-    </resultMap>
     <resultMap id="songAllMap" type="Map">
         <result column="id" property="id"/>
         <result column="cd_id" property="cdId"/>
@@ -79,13 +30,6 @@
         <result column="song_type" property="songType"/>
         <result column="description" property="description"/>
     </resultMap>
-    <delete id="deleteByBatch">
-        delete from song
-        where id
-        in
-        <foreach collection="array" item="id" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
+
 </mapper>
 

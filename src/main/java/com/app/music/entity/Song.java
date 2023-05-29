@@ -1,23 +1,32 @@
 package com.app.music.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
+@Data()
+@TableName("song")
 public class Song implements Serializable {
     /**
      * id
      */
+    @TableId()
     private int id;
 
     /**
      * 歌曲名称
      */
+    @TableField("song_name")
     private String songName;
 
     /**
      * url
      */
+    @TableField("song_url")
     private String songUrl;
 
     /**
@@ -28,26 +37,31 @@ public class Song implements Serializable {
     /**
      * 创建时间
      */
+    @TableField("create_time")
     private String createTime;
 
     /**
      * 歌曲封面
      */
+    @TableField("song_pic")
     private String songPic;
 
     /**
      * 歌曲类型
      */
+    @TableField("song_type")
     private String songType;
 
     /**
      * 所属 cd
      */
+    @TableField("cd_id")
     private int cdId;
 
     /**
      * file
      */
+    @TableField(exist = false)
     private MultipartFile file;
 
     /**
@@ -55,89 +69,4 @@ public class Song implements Serializable {
      */
 
     private String description;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public String getSongName() {
-        return songName;
-    }
-
-    public void setSongName(String songName) {
-        this.songName = songName;
-    }
-
-    public String getSongUrl() {
-        return songUrl;
-    }
-
-    public void setSongUrl(String songUrl) {
-        this.songUrl = songUrl;
-    }
-
-    public String getSinger() {
-        return singer;
-    }
-
-    public void setSinger(String singer) {
-        this.singer = singer;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getSongPic() {
-        return songPic;
-    }
-
-    public void setSongPic(String songPic) {
-        this.songPic = songPic;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-
-
-    public int getCdId() {
-        return cdId;
-    }
-
-    public void setCdId(int cdId) {
-        this.cdId = cdId;
-    }
-
-    public String getSongType() {
-
-        return songType;
-    }
-
-    public void setSongType(String songType) {
-        this.songType = songType;
-    }
 }

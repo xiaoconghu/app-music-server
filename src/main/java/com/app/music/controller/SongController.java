@@ -72,7 +72,7 @@ public class SongController {
      */
     @GetMapping("/query")
     public Result query() {
-        return songService.query();
+        return songService.queryAll();
     }
 
     /**

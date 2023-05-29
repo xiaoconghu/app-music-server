@@ -69,7 +69,7 @@ public class CdController {
      */
     @GetMapping("/query")
     public Result query() {
-        return cdService.query();
+        return cdService.queryAll();
     }
 
     /**

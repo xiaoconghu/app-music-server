@@ -2,37 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.app.music.dao.ICdDao">
 
-    <insert id="insert">
-        INSERT INTO cd (cd_name,singer_id,create_user,create_time,cd_pic,description)
-        VALUES
-        (#{cdName},#{singerId},#{createUser},#{createTime},#{cdPic},#{description})
-    </insert>
-
-    <delete id="delete">
-        DELETE FROM cd WHERE id= #{id}
-    </delete>
-
-    <update id="update">
-        UPDATE cd
-        <set>
-            cd_name=#{cdName},
-            cd_pic=#{cdPic},
-            singer_id=#{singerId},
-            create_user=#{createUser},
-            create_time=#{createTime},
-            description=#{description},
-        </set>
-        WHERE id=#{cdId}
-    </update>
-    <select id="query" resultMap="cdInfoMap">
+<select id="queryAll" resultMap="cdInfoMap">
         SELECT
         c.*,s.singer_name
         FROM
         cd c
         LEFT JOIN singer s ON s.id = c.singer_id
-    </select>
-    <select id="queryById" resultMap="cdMap">
-        SELECT * FROM cd WHERE id = #{id}
     </select>
     <resultMap id="cdInfoMap" type="Map">
         <result column="id" property="cdId"/>
@@ -43,20 +18,4 @@
         <result column="create_time" property="createTime"/>
         <result column="description" property="description"/>
     </resultMap>
-    <resultMap id="cdMap" type="Cd">
-        <result column="id" property="cdId"/>
-        <result column="cd_name" property="cdName"/>
-        <result column="singer_id" property="singerId"/>
-        <result column="create_user" property="createUser"/>
-        <result column="create_time" property="createTime"/>
-        <result column="description" property="description"/>
-    </resultMap>
-    <delete id="deleteByBatch">
-        delete from cd
-        where id
-        in
-        <foreach collection="array" item="id" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
 </mapper>

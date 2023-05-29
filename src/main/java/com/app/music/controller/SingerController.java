@@ -44,7 +44,7 @@ public class SingerController {
      */
     @GetMapping("/query")
     public Result query() {
-        return singerService.query();
+        return singerService.queryAll();
     }
 
     @GetMapping("/queryById/{singerId}")

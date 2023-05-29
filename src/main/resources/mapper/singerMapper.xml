@@ -2,40 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.app.music.dao.ISingerDao">
 
-    <insert id="insert" parameterType="Singer">
-        INSERT INTO singer (id,singer_name,singer_nick_name,singer_pic,singer_gender,description)
-        VALUES
-        (#{id},#{singerName},#{singerNickName},#{singerPic},#{singerGender},#{description})
-    </insert>
-    <delete id="delete">
-        DELETE  FROM singer WHERE id = #{id}
-    </delete>
-    <update id="update" parameterType="Singer">
-        UPDATE singer
-        <set>
-            <if test="singerName!=null">
-                singer_name = #{singerName},
-            </if>
-            <if test="singerNickName!=null">
-                singer_nick_name = #{singerNickName},
-            </if>
-            <if test="singerPic!=null">
-                singer_pic = #{singerPic},
-            </if>
-            <if test="singerGender!=null">
-                singer_gender = #{singerGender},
-            </if>
-            <if test="description!=null">
-                description = #{description},
-            </if>
-        </set>
-        WHERE id = #{id}
-    </update>
-    <select id="query" resultMap="singerMap">
+    <select id="queryAll" resultMap="singerMap">
         SELECT * FROM singer
-    </select>
-    <select id="queryById" resultMap="singerMap">
-        SELECT * FROM singer WHERE id = #{songId}
     </select>
     <resultMap id="singerMap" type="Singer">
         <result column="id" property="id"/>
@@ -46,13 +14,5 @@
         <result column="singer_pic" property="singerPic"/>
         <result column="description" property="description"/>
     </resultMap>
-    <delete id="deleteByBatch">
-        delete from singer
-        where id
-        in
-        <foreach collection="array" item="id" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
 </mapper>
 

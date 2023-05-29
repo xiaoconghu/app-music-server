@@ -1,7 +1,9 @@
 package com.app.music.entity;
 
-import java.io.Serializable;
+import lombok.Data;
 
+import java.io.Serializable;
+@Data()
 public class Singer implements Serializable {
     /**
      * id
@@ -31,60 +33,4 @@ public class Singer implements Serializable {
      * 描述
      */
     private String description;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getSingerName() {
-        return singerName;
-    }
-
-    public void setSingerName(String singerName) {
-        this.singerName = singerName;
-    }
-
-    public String getSingerNickName() {
-        return singerNickName;
-    }
-
-    public void setSingerNickName(String singerNickName) {
-        this.singerNickName = singerNickName;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getSingerPic() {
-        return singerPic;
-    }
-
-    public void setSingerPic(String singerPic) {
-        this.singerPic = singerPic;
-    }
-
-    public int getSingerGender() {
-        return singerGender;
-    }
-
-    public void setSingerGender(int singerGender) {
-        this.singerGender = singerGender;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

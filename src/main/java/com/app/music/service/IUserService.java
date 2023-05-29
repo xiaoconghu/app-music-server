@@ -2,14 +2,13 @@ package com.app.music.service;
 
 import com.app.music.entity.User;
 import com.app.music.utils.Result;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
-public interface IUserService {
+public interface IUserService  extends IService<User> {
 
     /**
      * 登录
