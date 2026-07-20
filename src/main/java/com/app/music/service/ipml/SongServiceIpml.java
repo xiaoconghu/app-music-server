@@ -108,13 +108,9 @@ public class SongServiceIpml extends ServiceImpl<ISongDao,Song> implements ISong
 
     @Override
     public Result update(Song song) {
-
-        Song _song = this.getById(song.getId());
-        if (_song != null) {
-            Boolean update = this.save(song);
-            return update ? CommonUtils.success(ResultCode.SUCCESS, null)
-                    : CommonUtils.failed(ResultCode.NETWORK_ERROR);
-        } else return CommonUtils.failed(ResultCode.SONG_ERROR);
+        boolean updated = this.updateById(song);
+        return updated ? CommonUtils.success(ResultCode.SUCCESS, null)
+                : CommonUtils.failed(ResultCode.SONG_ERROR);
     }
 
     @Override

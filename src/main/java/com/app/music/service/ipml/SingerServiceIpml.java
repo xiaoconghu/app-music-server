@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class SingerServiceIpml extends ServiceImpl<ISingerDao, Singer>  implements ISingerService {
+public class SingerServiceIpml extends ServiceImpl<ISingerDao, Singer> implements ISingerService {
 
     @Override
     public Result insert(Singer singer) {
@@ -37,12 +37,9 @@ public class SingerServiceIpml extends ServiceImpl<ISingerDao, Singer>  implemen
 
     @Override
     public Result update(Singer singer) {
-        Singer _singer = this.getById(singer.getId());
-        if (_singer != null) {
-            Boolean update = this.saveOrUpdate(singer);
-            return update ? CommonUtils.success(ResultCode.SUCCESS, null)
-                    : CommonUtils.failed(ResultCode.NETWORK_ERROR);
-        } else return CommonUtils.failed(ResultCode.SONG_ERROR);
+        boolean updated = this.updateById(singer);
+        return updated ? CommonUtils.success(ResultCode.SUCCESS, null)
+                : CommonUtils.failed(ResultCode.SINGER_ERROR);
     }
 
     @Override
@@ -56,6 +53,7 @@ public class SingerServiceIpml extends ServiceImpl<ISingerDao, Singer>  implemen
         Singer singer = this.getById(id);
         return CommonUtils.success(ResultCode.SUCCESS, singer);
     }
+
     @Override
     public Result deleteByBatch(String[] arr) {
         this.removeByIds(Arrays.asList(arr));

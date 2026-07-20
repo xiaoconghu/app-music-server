@@ -9,7 +9,9 @@ public enum ResultCode {
     NETWORK_ERROR(-1, "网络异常，请稍后重试"),
     LOGIN_USER_ERROR(11000, "用户名已存在"),
     PERMISSIONS_ERROR(11010, "没有操作权限"),
+    SINGER_ERROR(11002, "歌手不存在，或已删除"),
     SONG_ERROR(11001, "歌曲不存在，或已删除");
+
 
     /**
      * 请求代码
@@ -29,4 +31,4 @@ public enum ResultCode {
     public String getMsg() {
         return msg;
     }
-}
+    }

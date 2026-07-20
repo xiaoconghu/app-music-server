@@ -56,7 +56,7 @@ public class CdServiceIpml extends ServiceImpl<ICdDao, Cd> implements ICdService
 
 
     public Result update(Cd cd) {
-        boolean update = this.saveOrUpdate(cd);
+        boolean update = this.updateById(cd);
         if (update) {
             return CommonUtils.success(ResultCode.SUCCESS, null);
         } else {
